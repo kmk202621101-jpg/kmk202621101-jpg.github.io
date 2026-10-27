@@ -3,11 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>개인 블로그</title>
+    <title>개인 기술 블로그</title>
     <style>
         body { font-family: sans-serif; background: #0d1117; color: #c9d1d9; padding: 40px; margin: 0; }
         .container { max-width: 800px; margin: 0 auto; }
         h1 { color: #fff; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+        
+        /* 자기소개 프로필 카드 스타일 */
+        .profile-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 25px; margin-bottom: 30px; display: flex; align-items: center; gap: 20px; }
+        .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: #21262d; border: 2px solid #58a6ff; display: flex; align-items: center; justify-content: center; font-size: 36px; flex-shrink: 0; }
+        .profile-info h2 { margin: 0 0 8px 0; color: #fff; font-size: 20px; }
+        .profile-info p { margin: 4px 0; color: #8b949e; font-size: 14px; }
+        .profile-tags { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .tag { background: #21262d; border: 1px solid #30363d; color: #58a6ff; padding: 3px 10px; border-radius: 12px; font-size: 12px; }
         
         /* 메인 홈 카테고리 그리드 */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
@@ -97,8 +105,21 @@
         <!-- 메인 홈 화면 -->
         <div id="home-view">
             <h1>🔒 개인 기술 블로그</h1>
-            <p>학습 과정과 활동 기록을 정리하는 공간입니다.</p>
             
+            <!-- 👋 자기소개 프로필 카드 영역 -->
+            <div class="profile-card">
+                <div class="profile-avatar">👩‍💻</div>
+                <div class="profile-info">
+                    <h2>안녕하세요! 보안 및 개발 학습 기록 공간입니다.</h2>
+                    <p>정보보안 및 소프트웨어 개발 관련 스터디 내용을 자유롭게 기록하는 개인 블로그입니다.</p>
+                    <div class="profile-tags">
+                        <span class="tag">#WebSecurity</span>
+                        <span class="tag">#SystemSecurity</span>
+                        <span class="tag">#C/Python/Java</span>
+                    </div>
+                </div>
+            </div>
+
             <h2>📌 카테고리</h2>
             <div class="grid">
                 <a href="#dev">
