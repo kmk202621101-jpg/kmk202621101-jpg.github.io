@@ -13,7 +13,7 @@
         .profile-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 25px; margin-bottom: 30px; display: flex; align-items: center; gap: 20px; }
         .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: #21262d; border: 2px solid #58a6ff; display: flex; align-items: center; justify-content: center; font-size: 36px; flex-shrink: 0; }
         .profile-info h2 { margin: 0 0 8px 0; color: #fff; font-size: 20px; }
-        .profile-info p { margin: 4px 0; color: #8b949e; font-size: 14px; }
+        .profile-info p { margin: 4px 0; color: #8b949e; font-size: 14px; line-height: 1.5; }
         .profile-tags { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
         .tag { background: #21262d; border: 1px solid #30363d; color: #58a6ff; padding: 3px 10px; border-radius: 12px; font-size: 12px; }
         
@@ -102,6 +102,17 @@
             </div>
         </div>
 
+        <!-- 7. 개인공부 상세 페이지 -->
+        <div id="study" class="page">
+            <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+            <h1>📖 개인공부 (Study & Note)</h1>
+            <p>전공 공부, 개인 메모, 자습 내용을 자유롭게 기록하는 공간입니다.</p>
+            <div class="post-box">
+                <h3>📌 개인 자습 & 요약 노트</h3>
+                <p>수업 내용 복습이나 개인적으로 공부한 자료를 작성하는 공간입니다.</p>
+            </div>
+        </div>
+
         <!-- 메인 홈 화면 -->
         <div id="home-view">
             <h1>🔒 개인 블로그</h1>
@@ -111,12 +122,12 @@
                 <div class="profile-avatar">👩‍💻</div>
                 <div class="profile-info">
                     <h2>안녕하세요! 상명대 CodeCure 김민경입니다.</h2>
-                    <p>정보보안공학과에 재학중이고 26학번입니다! 
-                        아직 배워가는 단계이지만, 이번 활동을 계기로 다양한 보안 및 개발 지식을 차근차근 배워가겠습니다 .</p>
+                    <p>정보보안공학과에 재학중이고 26학번입니다! 아직 배워가는 단계이지만, 이번 활동을 계기로 다양한 보안 및 개발 지식을 차근차근 배워가겠습니다.</p>
                     <div class="profile-tags">
                         <span class="tag">#WebSecurity</span>
                         <span class="tag">#SystemSecurity</span>
                         <span class="tag">#C/Python/Java</span>
+                        <span class="tag">#StudyNote</span>
                     </div>
                 </div>
             </div>
@@ -140,6 +151,9 @@
                 </a>
                 <a href="#cert">
                     <div class="card"><h3>🏆 공모전 / 자격증</h3><p>성과 및 자격증 기록</p></div>
+                </a>
+                <a href="#study">
+                    <div class="card"><h3>📖 개인공부</h3><p>자율 학습 및 메모</p></div>
                 </a>
             </div>
         </div>
