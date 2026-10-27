@@ -2,43 +2,124 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>개인 기술 블로그</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인 블로그</title>
     <style>
-        body { font-family: sans-serif; background: #0d1117; color: #c9d1d9; padding: 40px; }
+        body { font-family: sans-serif; background: #0d1117; color: #c9d1d9; padding: 40px; margin: 0; }
         .container { max-width: 800px; margin: 0 auto; }
         h1 { color: #fff; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+        
+        /* 메인 홈 카테고리 그리드 */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
-        .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; transition: 0.2s; cursor: pointer; }
-        .card:hover { border-color: #58a6ff; background: #1f242c; }
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; transition: 0.2s; cursor: pointer; }
+        .card:hover { border-color: #58a6ff; background: #1f242c; transform: translateY(-2px); }
         .card h3 { color: #58a6ff; margin-top: 0; }
+        
+        /* 상세 페이지 스타일 */
+        .page { display: none; background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 30px; margin-top: 20px; }
+        .page:target { display: block; }
+        .page:target ~ #home-view { display: none; }
+        
+        .back-btn { display: inline-block; margin-bottom: 20px; color: #58a6ff; text-decoration: none; font-weight: bold; }
+        .back-btn:hover { text-decoration: underline; }
+        .post-box { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 15px; margin-top: 15px; }
         a { text-decoration: none; color: inherit; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🔒 개인 기술 블로그</h1>
-        <p>학습 과정과 활동 기록을 정리하는 공간입니다.</p>
-        
-        <h2>📌 카테고리</h2>
-        <div class="grid">
-            <a href="#dev" onclick="alert('💻 개발 카테고리입니다. 추후 상세 글을 작성하세요!')">
-                <div class="card"><h3>💻 개발</h3><p>프로그래밍 및 개발 기록</p></div>
-            </a>
-            <a href="#ctf" onclick="alert('🛡️ CTF / Wargame 카테고리입니다.')">
-                <div class="card"><h3>🛡️ CTF / Wargame</h3><p>보안 문제 풀이 및 분석</p></div>
-            </a>
-            <a href="#bug" onclick="alert('🔍 Bug Bounty 카테고리입니다.')">
-                <div class="card"><h3>🔍 Bug Bounty</h3><p>취약점 연구</p></div>
-            </a>
-            <a href="#doc" onclick="alert('📝 블로그 / 기술문서 카테고리입니다.')">
-                <div class="card"><h3>📝 블로그 / 기술문서</h3><p>기술 정리 문서</p></div>
-            </a>
-            <a href="#conf" onclick="alert('🎓 논문 / 컨퍼런스 카테고리입니다.')">
-                <div class="card"><h3>🎓 논문 / 컨퍼런스</h3><p>보안 자료 정리</p></div>
-            </a>
-            <a href="#cert" onclick="alert('🏆 공모전 / 자격증 카테고리입니다.')">
-                <div class="card"><h3>🏆 공모전 / 자격증</h3><p>성과 및 자격증 기록</p></div>
-            </a>
+        <!-- 1. 개발 상세 페이지 -->
+        <div id="dev" class="page">
+            <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+            <h1>💻 개발 (Development)</h1>
+            <p>프로그래밍 언어, 알고리즘, 웹/시스템 개발 기록 공간입니다.</p>
+            <div class="post-box">
+                <h3>📌 C / Python / Java 학습 기록</h3>
+                <p>여기에 공부한 개발 내용이나 코드 포스팅을 작성할 수 있습니다.</p>
+            </div>
+        </div>
+
+        <!-- 2. CTF / Wargame 상세 페이지 -->
+        <div id="ctf" class="page">
+            <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+            <h1>🛡️ CTF / Wargame</h1>
+            <p>보안 문제 풀이 Write-up 및 시스템/웹 분석 기록 공간입니다.</p>
+            <div class="post-box">
+                <h3>📌 Web / System Hacking 풀이</h3>
+                <p>워게임 문제 분석 및 워크스루(Write-up)를 정리하는 곳입니다.</p>
+            </div>
+        </div>
+
+        <!-- 3. Bug Bounty 상세 페이지 -->
+        <div id="bug" class="page">
+            <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+            <h1>🔍 Bug Bounty</h1>
+            <p>취약점 연구 및 버그바운티 탐색 기록 공간입니다.</p>
+            <div class="post-box">
+                <h3>📌 취약점 분석 및 보고서</h3>
+                <p>발견한 보안 취약점 연구 및 분석 노트를 기록합니다.</p>
+            </div>
+        </div>
+
+        <!-- 4. 블로그 / 기술문서 상세 페이지 -->
+        <div id="doc" class="page">
+            <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+            <h1>📝 블로그 / 기술문서</h1>
+            <p>보안 및 IT 제반 기술 정리 문서 공간입니다.</p>
+            <div class="post-box">
+                <h3>📌 기술 개념 정리</h3>
+                <p>네트워크, OS, 보안 개념 등 스터디한 기술을 요약해 놓는 공간입니다.</p>
+            </div>
+        </div>
+
+        <!-- 5. 논문 / 컨퍼런스 상세 페이지 -->
+        <div id="conf" class="page">
+            <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+            <h1>🎓 논문 / 컨퍼런스</h1>
+            <p>보안 학술 논문 리뷰 및 컨퍼런스 참관 기록 공간입니다.</p>
+            <div class="post-box">
+                <h3>📌 논문 요약 & 발표 자료</h3>
+                <p>읽은 보안 논문 분석이나 세미나 정리 내용을 기록합니다.</p>
+            </div>
+        </div>
+
+        <!-- 6. 공모전 / 자격증 상세 페이지 -->
+        <div id="cert" class="page">
+            <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+            <h1>🏆 공모전 / 자격증</h1>
+            <p>대외활동, 보안 경진대회 및 자격증 취득 기록 공간입니다.</p>
+            <div class="post-box">
+                <h3>📌 성과 및 이력</h3>
+                <p>참여한 공모전 성과와 보안 자격증 준비 과정을 기록합니다.</p>
+            </div>
+        </div>
+
+        <!-- 메인 홈 화면 -->
+        <div id="home-view">
+            <h1>🔒 개인 기술 블로그</h1>
+            <p>학습 과정과 활동 기록을 정리하는 공간입니다.</p>
+            
+            <h2>📌 카테고리</h2>
+            <div class="grid">
+                <a href="#dev">
+                    <div class="card"><h3>💻 개발</h3><p>프로그래밍 및 개발 기록</p></div>
+                </a>
+                <a href="#ctf">
+                    <div class="card"><h3>🛡️ CTF / Wargame</h3><p>보안 문제 풀이 및 분석</p></div>
+                </a>
+                <a href="#bug">
+                    <div class="card"><h3>🔍 Bug Bounty</h3><p>취약점 연구</p></div>
+                </a>
+                <a href="#doc">
+                    <div class="card"><h3>📝 블로그 / 기술문서</h3><p>기술 정리 문서</p></div>
+                </a>
+                <a href="#conf">
+                    <div class="card"><h3>🎓 논문 / 컨퍼런스</h3><p>보안 자료 정리</p></div>
+                </a>
+                <a href="#cert">
+                    <div class="card"><h3>🏆 공모전 / 자격증</h3><p>성과 및 자격증 기록</p></div>
+                </a>
+            </div>
         </div>
     </div>
 </body>
