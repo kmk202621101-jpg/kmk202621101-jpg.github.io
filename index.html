@@ -1,286 +1,323 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>개인 기술 블로그</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0d1117; color: #c9d1d9; padding: 40px; margin: 0; }
-        .container { max-width: 800px; margin: 0 auto; position: relative; }
-        h1 { color: #fff; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
-        
-        /* 자기소개 프로필 카드 스타일 */
-        .profile-card { 
-            background: #161b22; 
-            border: 1px solid #30363d; 
-            border-radius: 12px; 
-            padding: 25px; 
-            margin-bottom: 30px; 
-            display: flex; 
-            align-items: center; 
-            gap: 20px; 
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        
-        .profile-avatar { 
-            width: 85px; 
-            height: 85px; 
-            border-radius: 50%; 
-            background: #21262d; 
-            border: 2px solid #58a6ff; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            overflow: hidden;
-            flex-shrink: 0; 
-            box-shadow: 0 0 10px rgba(88, 166, 255, 0.3);
-        }
 
-        .profile-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>개인 기술 블로그</title>
+
+    <style>
+
+        body { font-family: sans-serif; background: #0d1117; color: #c9d1d9; padding: 40px; margin: 0; }
+
+        .container { max-width: 800px; margin: 0 auto; }
+
+        h1 { color: #fff; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+
+        
+
+        /* 자기소개 프로필 카드 스타일 */
+
+        .profile-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 25px; margin-bottom: 30px; display: flex; align-items: center; gap: 20px; }
+
+        .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: #21262d; border: 2px solid #58a6ff; display: flex; align-items: center; justify-content: center; font-size: 36px; flex-shrink: 0; }
 
         .profile-info h2 { margin: 0 0 8px 0; color: #fff; font-size: 20px; }
+
         .profile-info p { margin: 4px 0; color: #8b949e; font-size: 14px; line-height: 1.5; }
+
         .profile-tags { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+
         .tag { background: #21262d; border: 1px solid #30363d; color: #58a6ff; padding: 3px 10px; border-radius: 12px; font-size: 12px; }
+
         
-        /* 짱구 대화상자 스타일 */
-        .shinchan-speech {
-            background: #1f242c;
-            border: 1px solid #e3b341;
-            color: #f0e68c;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            margin-top: 8px;
-            display: inline-block;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .shinchan-speech:hover { transform: scale(1.02); }
 
         /* 메인 홈 카테고리 그리드 */
+
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+
         .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; transition: 0.2s; cursor: pointer; }
-        .card:hover { border-color: #58a6ff; background: #1f242c; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(88, 166, 255, 0.15); }
+
+        .card:hover { border-color: #58a6ff; background: #1f242c; transform: translateY(-2px); }
+
         .card h3 { color: #58a6ff; margin-top: 0; }
+
         
+
         /* 상세 페이지 스타일 */
+
         .page { display: none; background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 30px; margin-top: 20px; }
+
         .page:target { display: block; }
+
         .page:target ~ #home-view { display: none; }
+
         
+
         .back-btn { display: inline-block; margin-bottom: 20px; color: #58a6ff; text-decoration: none; font-weight: bold; }
+
         .back-btn:hover { text-decoration: underline; }
+
         .post-box { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 15px; margin-top: 15px; }
+
         a { text-decoration: none; color: inherit; }
 
-        /* 짱구 우측 하단 캐릭터 위젯 (버튼 프레임 제거) */
-        .shinchan-character-widget {
-            position: fixed;
-            bottom: 20px;
-            right: 25px;
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .shinchan-tooltip {
-            visibility: hidden;
-            opacity: 0;
-            background: #161b22;
-            color: #e3b341;
-            border: 1px solid #e3b341;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            margin-bottom: 6px;
-            white-space: nowrap;
-            transition: opacity 0.3s, visibility 0.3s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-
-        .shinchan-character-widget:hover .shinchan-tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        /* 캐릭터 이미지 본래 모양 및 모션 효과 */
-        .shinchan-character-img {
-            width: 110px;
-            height: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
-            transition: transform 0.3s ease;
-            animation: floatMotion 3s ease-in-out infinite;
-        }
-
-        .shinchan-character-widget:hover .shinchan-character-img {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        /* 둥둥 떠있는 애니메이션 효과 */
-        @keyframes floatMotion {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
     </style>
+
 </head>
+
 <body>
+
     <div class="container">
+
         <!-- 1. 개발 상세 페이지 -->
+
         <div id="dev" class="page">
+
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+
             <h1>💻 개발 (Development)</h1>
+
             <p>프로그래밍 언어, 알고리즘, 웹/시스템 개발 기록 공간입니다.</p>
+
             <div class="post-box">
+
                 <h3>📌 C / Python / Java 학습 기록</h3>
+
                 <p>여기에 공부한 개발 내용이나 코드 포스팅을 작성할 수 있습니다.</p>
+
             </div>
+
         </div>
+
+
 
         <!-- 2. CTF / Wargame 상세 페이지 -->
+
         <div id="ctf" class="page">
+
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+
             <h1>🛡️ CTF / Wargame</h1>
+
             <p>보안 문제 풀이 Write-up 및 시스템/웹 분석 기록 공간입니다.</p>
+
             <div class="post-box">
+
                 <h3>📌 Web / System Hacking 풀이</h3>
+
                 <p>워게임 문제 분석 및 워크스루(Write-up)를 정리하는 곳입니다.</p>
+
             </div>
+
         </div>
+
+
 
         <!-- 3. Bug Bounty 상세 페이지 -->
+
         <div id="bug" class="page">
+
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+
             <h1>🔍 Bug Bounty</h1>
+
             <p>취약점 연구 및 버그바운티 탐색 기록 공간입니다.</p>
+
             <div class="post-box">
+
                 <h3>📌 취약점 분석 및 보고서</h3>
+
                 <p>발견한 보안 취약점 연구 및 분석 노트를 기록합니다.</p>
+
             </div>
+
         </div>
+
+
 
         <!-- 4. 블로그 / 기술문서 상세 페이지 -->
+
         <div id="doc" class="page">
+
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+
             <h1>📝 블로그 / 기술문서</h1>
+
             <p>보안 및 IT 제반 기술 정리 문서 공간입니다.</p>
+
             <div class="post-box">
+
                 <h3>📌 기술 개념 정리</h3>
+
                 <p>네트워크, OS, 보안 개념 등 스터디한 기술을 요약해 놓는 공간입니다.</p>
+
             </div>
+
         </div>
+
+
 
         <!-- 5. 논문 / 컨퍼런스 상세 페이지 -->
+
         <div id="conf" class="page">
+
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+
             <h1>🎓 논문 / 컨퍼런스</h1>
+
             <p>보안 학술 논문 리뷰 및 컨퍼런스 참관 기록 공간입니다.</p>
+
             <div class="post-box">
+
                 <h3>📌 논문 요약 & 발표 자료</h3>
+
                 <p>읽은 보안 논문 분석이나 세미나 정리 내용을 기록합니다.</p>
+
             </div>
+
         </div>
+
+
 
         <!-- 6. 공모전 / 자격증 상세 페이지 -->
+
         <div id="cert" class="page">
+
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+
             <h1>🏆 공모전 / 자격증</h1>
+
             <p>대외활동, 보안 경진대회 및 자격증 취득 기록 공간입니다.</p>
+
             <div class="post-box">
+
                 <h3>📌 성과 및 이력</h3>
+
                 <p>참여한 공모전 성과와 보안 자격증 준비 과정을 기록합니다.</p>
+
             </div>
+
         </div>
+
+
 
         <!-- 7. 개인공부 상세 페이지 -->
+
         <div id="study" class="page">
+
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
+
             <h1>📖 개인공부 (Study & Note)</h1>
+
             <p>전공 공부, 개인 메모, 자습 내용을 자유롭게 기록하는 공간입니다.</p>
+
             <div class="post-box">
+
                 <h3>📌 개인 자습 & 요약 노트</h3>
+
                 <p>수업 내용 복습이나 개인적으로 공부한 자료를 작성하는 공간입니다.</p>
+
             </div>
+
         </div>
+
+
 
         <!-- 메인 홈 화면 -->
+
         <div id="home-view">
+
             <h1>🔒 개인 블로그</h1>
+
             
+
             <!-- 👋 자기소개 프로필 카드 영역 -->
+
             <div class="profile-card">
-                <div class="profile-avatar">
-                    <!-- 짱구 프로필 이미지 -->
-                    <img src="https://lh3.googleusercontent.com/d/1O6wLvhK1I_p97gq0bU-zRk7S32K5lW0w" alt="짱구 프로필">
-                </div>
+
+                <div class="profile-avatar">👩‍💻</div>
+
                 <div class="profile-info">
-                    <h2>안녕하세요! 상명대 CodeCure 김민경입니다. 💛</h2>
+
+                    <h2>안녕하세요! 상명대 CodeCure 김민경입니다.</h2>
+
                     <p>정보보안공학과에 재학중이고 26학번입니다! 아직 배워가는 단계이지만, 이번 활동을 계기로 다양한 보안 및 개발 지식을 차근차근 배워가겠습니다.</p>
-                    
-                    <!-- 짱구 대화상자 (클릭하면 멘트 변경) -->
-                    <div class="shinchan-speech" onclick="changeQuote(this)">
-                        💬 짱구: "천재 보안 개발자가 될 거라구~! (클릭해보세요)"
-                    </div>
 
                     <div class="profile-tags">
+
                         <span class="tag">#WebSecurity</span>
+
                         <span class="tag">#SystemSecurity</span>
+
                         <span class="tag">#C/Python/Java</span>
+
                         <span class="tag">#StudyNote</span>
+
                     </div>
+
                 </div>
+
             </div>
+
+
 
             <h2>📌 카테고리</h2>
+
             <div class="grid">
+
                 <a href="#dev">
+
                     <div class="card"><h3>💻 개발</h3><p>프로그래밍 및 개발 기록</p></div>
+
                 </a>
+
                 <a href="#ctf">
+
                     <div class="card"><h3>🛡️ CTF / Wargame</h3><p>보안 문제 풀이 및 분석</p></div>
+
                 </a>
+
                 <a href="#bug">
+
                     <div class="card"><h3>🔍 Bug Bounty</h3><p>취약점 연구</p></div>
+
                 </a>
+
                 <a href="#doc">
+
                     <div class="card"><h3>📝 블로그 / 기술문서</h3><p>기술 정리 문서</p></div>
+
                 </a>
+
                 <a href="#conf">
+
                     <div class="card"><h3>🎓 논문 / 컨퍼런스</h3><p>보안 자료 정리</p></div>
+
                 </a>
+
                 <a href="#cert">
+
                     <div class="card"><h3>🏆 공모전 / 자격증</h3><p>성과 및 자격증 기록</p></div>
+
                 </a>
+
                 <a href="#study">
+
                     <div class="card"><h3>📖 개인공부</h3><p>자율 학습 및 메모</p></div>
+
                 </a>
+
             </div>
+
         </div>
+
     </div>
 
-    <!-- 짱구 우측 하단 캐릭터 스크롤 위젯 -->
-    <div class="shinchan-character-widget" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-        <div class="shinchan-tooltip">부라보~! 맨 위로 스크롤할까? 🚀</div>
-        <img src="https://lh3.googleusercontent.com/d/1O6wLvhK1I_p97gq0bU-zRk7S32K5lW0w" alt="짱구 캐릭터" class="shinchan-character-img">
-    </div>
+</body>
 
-    <!-- 자바스크립트 (짱구 대화상자 대사 변경) -->
-    <script>
-        const quotes = [
-            '💬 짱구: "오늘도 열공이라구~! 🔥"',
-            '💬 짱구: "버그야 버그야 다 물러가라~! 🐛"',
-            '💬 짱구: "액션 가면도 인정할 보안 전문가! 🦸‍♂️"',
-            '💬 짱구: "초코비 먹으면서 코딩하면 집중 잘 됨! 🍫"',
-            '💬 짱구: "천재 보안 개발자가 될 거라구~! ✨"'
-        ];
-        
-        function changeQuote(element) {
-            const randomIndex = Math.
+</html>
