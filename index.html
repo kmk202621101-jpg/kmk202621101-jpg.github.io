@@ -79,15 +79,15 @@
         .post-box { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 15px; margin-top: 15px; }
         a { text-decoration: none; color: inherit; }
 
-        /* 짱구 Floating 탑 버튼 스타일 */
-        .shinchan-float-btn {
+        /* 짱구 우측 하단 캐릭터 위젯 (버튼 프레임 제거) */
+        .shinchan-character-widget {
             position: fixed;
-            bottom: 25px;
+            bottom: 20px;
             right: 25px;
             z-index: 999;
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
+            align-items: center;
             cursor: pointer;
         }
 
@@ -100,40 +100,35 @@
             padding: 6px 12px;
             border-radius: 8px;
             font-size: 12px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             white-space: nowrap;
             transition: opacity 0.3s, visibility 0.3s;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
-        .shinchan-float-btn:hover .shinchan-tooltip {
+        .shinchan-character-widget:hover .shinchan-tooltip {
             visibility: visible;
             opacity: 1;
         }
 
-        .shinchan-btn-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #161b22;
-            border: 2px solid #e3b341;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 15px rgba(227, 179, 65, 0.4);
-            transition: transform 0.3s, border-color 0.3s;
-            overflow: hidden;
-        }
-
-        .shinchan-btn-img:hover {
-            transform: scale(1.1) rotate(10deg);
-            border-color: #ff7b72;
-        }
-
-        .shinchan-btn-img img {
-            width: 85%;
-            height: 85%;
+        /* 캐릭터 이미지 본래 모양 및 모션 효과 */
+        .shinchan-character-img {
+            width: 110px;
+            height: auto;
             object-fit: contain;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+            animation: floatMotion 3s ease-in-out infinite;
+        }
+
+        .shinchan-character-widget:hover .shinchan-character-img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* 둥둥 떠있는 애니메이션 효과 */
+        @keyframes floatMotion {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
     </style>
 </head>
@@ -271,28 +266,21 @@
         </div>
     </div>
 
-    <!-- 짱구 우측 하단 Floating 위젯 (Back to Top) -->
-    <div class="shinchan-float-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <!-- 짱구 우측 하단 캐릭터 스크롤 위젯 -->
+    <div class="shinchan-character-widget" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
         <div class="shinchan-tooltip">부라보~! 맨 위로 스크롤할까? 🚀</div>
-        <div class="shinchan-btn-img">
-            <img src="https://lh3.googleusercontent.com/d/1O6wLvhK1I_p97gq0bU-zRk7S32K5lW0w" alt="짱구 탑버튼">
-        </div>
+        <img src="https://lh3.googleusercontent.com/d/1O6wLvhK1I_p97gq0bU-zRk7S32K5lW0w" alt="짱구 캐릭터" class="shinchan-character-img">
     </div>
 
-    <!-- 간단한 자바스크립트 (짱구 대화상자 대사 변경 기능) -->
+    <!-- 자바스크립트 (짱구 대화상자 대사 변경) -->
     <script>
         const quotes = [
             '💬 짱구: "오늘도 열공이라구~! 🔥"',
             '💬 짱구: "버그야 버그야 다 물러가라~! 🐛"',
-            '💬 흉구: "액션 가면도 인정할 보안 전문가! 🦸‍♂️"',
+            '💬 짱구: "액션 가면도 인정할 보안 전문가! 🦸‍♂️"',
             '💬 짱구: "초코비 먹으면서 코딩하면 집중 잘 됨! 🍫"',
             '💬 짱구: "천재 보안 개발자가 될 거라구~! ✨"'
         ];
         
         function changeQuote(element) {
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            element.innerText = quotes[randomIndex];
-        }
-    </script>
-</body>
-</html>
+            const randomIndex = Math.
