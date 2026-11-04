@@ -1,323 +1,431 @@
 <!DOCTYPE html>
-
 <html lang="ko">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>개인 기술 블로그</title>
-
+    <title>Security & Dev Archive | 김민경</title>
+    <!-- 트렌디한 모던 폰트 (Inter & Fira Code) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: rgba(22, 27, 34, 0.75);
+            --border-color: #30363d;
+            --accent-blue: #58a6ff;
+            --accent-cyan: #39c5bb;
+            --accent-green: #3fb950;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --input-bg: #011627;
+        }
 
-        body { font-family: sans-serif; background: #0d1117; color: #c9d1d9; padding: 40px; margin: 0; }
+        /* 라이트 모드 변수 정의 */
+        body.light-mode {
+            --bg-primary: #f6f8fa;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --border-color: #d0d7de;
+            --accent-blue: #0969da;
+            --accent-cyan: #059669;
+            --accent-green: #1a7f37;
+            --text-primary: #1f2328;
+            --text-secondary: #656d76;
+            --input-bg: #eaeeef;
+        }
 
-        .container { max-width: 800px; margin: 0 auto; }
+        * { box-sizing: border-box; }
 
-        h1 { color: #fff; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background-color: var(--bg-primary); 
+            background-image: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.06) 0%, transparent 60%);
+            color: var(--text-primary); 
+            padding: 30px 20px; 
+            margin: 0; 
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
+        .container { max-width: 860px; margin: 0 auto; position: relative; }
+
+        /* 상단 네비게이션 & 시스템 바 */
+        .system-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Fira Code', monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            margin-right: 6px;
+            box-shadow: 0 0 8px var(--accent-green);
+        }
+
+        /* 메인 헤더 */
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+            margin-bottom: 28px;
+        }
+
+        h1 { 
+            color: var(--text-primary); 
+            font-size: 24px; 
+            font-weight: 700; 
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 테마 토글 버튼 */
+        .theme-toggle-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        /* 자기소개 프로필 카드 (글래스모피즘 효과) */
+        .profile-card { 
+            background: var(--bg-card); 
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color); 
+            border-radius: 14px; 
+            padding: 26px; 
+            margin-bottom: 30px; 
+            display: flex; 
+            align-items: center; 
+            gap: 22px; 
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transition: border-color 0.3s;
+        }
+
+        .profile-card:hover { border-color: rgba(88, 166, 255, 0.4); }
         
+        .profile-avatar { 
+            width: 80px; 
+            height: 80px; 
+            border-radius: 50%; 
+            background: var(--bg-secondary); 
+            border: 2px solid var(--accent-blue); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 36px;
+            flex-shrink: 0; 
+            box-shadow: 0 0 16px rgba(88, 166, 255, 0.2);
+        }
 
-        /* 자기소개 프로필 카드 스타일 */
+        .profile-info h2 { margin: 0 0 8px 0; color: var(--text-primary); font-size: 19px; font-weight: 700; }
+        .profile-info p { margin: 6px 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6; }
 
-        .profile-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 25px; margin-bottom: 30px; display: flex; align-items: center; gap: 20px; }
+        .profile-tags { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .tag { 
+            background: var(--bg-secondary); 
+            border: 1px solid var(--border-color); 
+            color: var(--accent-blue); 
+            padding: 4px 12px; 
+            border-radius: 16px; 
+            font-size: 12px; 
+            font-family: 'Fira Code', monospace;
+        }
 
-        .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: #21262d; border: 2px solid #58a6ff; display: flex; align-items: center; justify-content: center; font-size: 36px; flex-shrink: 0; }
+        /* 실시간 검색 영역 */
+        .search-container {
+            margin-bottom: 24px;
+        }
 
-        .profile-info h2 { margin: 0 0 8px 0; color: #fff; font-size: 20px; }
+        .search-input {
+            width: 100%;
+            padding: 12px 18px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: 'Fira Code', monospace;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
 
-        .profile-info p { margin: 4px 0; color: #8b949e; font-size: 14px; line-height: 1.5; }
-
-        .profile-tags { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
-
-        .tag { background: #21262d; border: 1px solid #30363d; color: #58a6ff; padding: 3px 10px; border-radius: 12px; font-size: 12px; }
-
-        
+        .search-input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
+        }
 
         /* 메인 홈 카테고리 그리드 */
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 16px; }
 
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .card { 
+            background: var(--bg-card); 
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color); 
+            border-radius: 12px; 
+            padding: 22px; 
+            transition: all 0.25s ease; 
+            cursor: pointer; 
+            position: relative;
+            overflow: hidden;
+        }
 
-        .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; transition: 0.2s; cursor: pointer; }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
 
-        .card:hover { border-color: #58a6ff; background: #1f242c; transform: translateY(-2px); }
+        .card:hover { 
+            border-color: rgba(88, 166, 255, 0.5); 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+        }
 
-        .card h3 { color: #58a6ff; margin-top: 0; }
+        .card:hover::before { opacity: 1; }
 
-        
+        .card h3 { color: var(--accent-blue); margin: 0 0 8px 0; font-size: 16px; }
+        .card p { color: var(--text-secondary); margin: 0; font-size: 13.5px; }
 
         /* 상세 페이지 스타일 */
-
-        .page { display: none; background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 30px; margin-top: 20px; }
-
+        .page { display: none; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 14px; padding: 32px; margin-top: 20px; }
         .page:target { display: block; }
-
         .page:target ~ #home-view { display: none; }
-
         
+        .back-btn { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 6px; 
+            margin-bottom: 24px; 
+            color: var(--accent-blue); 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 14px;
+            transition: color 0.2s;
+        }
 
-        .back-btn { display: inline-block; margin-bottom: 20px; color: #58a6ff; text-decoration: none; font-weight: bold; }
+        .back-btn:hover { color: var(--accent-cyan); text-decoration: underline; }
 
-        .back-btn:hover { text-decoration: underline; }
-
-        .post-box { background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 15px; margin-top: 15px; }
+        .post-box { 
+            background: var(--bg-primary); 
+            border: 1px solid var(--border-color); 
+            border-radius: 10px; 
+            padding: 20px; 
+            margin-top: 20px; 
+        }
 
         a { text-decoration: none; color: inherit; }
 
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            .profile-card { flex-direction: column; text-align: center; }
+            .profile-tags { justify-content: center; }
+            .system-bar { flex-direction: column; gap: 6px; text-align: center; }
+        }
     </style>
-
 </head>
-
 <body>
-
     <div class="container">
-
         <!-- 1. 개발 상세 페이지 -->
-
         <div id="dev" class="page">
-
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-
             <h1>💻 개발 (Development)</h1>
-
             <p>프로그래밍 언어, 알고리즘, 웹/시스템 개발 기록 공간입니다.</p>
-
             <div class="post-box">
-
                 <h3>📌 C / Python / Java 학습 기록</h3>
-
                 <p>여기에 공부한 개발 내용이나 코드 포스팅을 작성할 수 있습니다.</p>
-
             </div>
-
         </div>
-
-
 
         <!-- 2. CTF / Wargame 상세 페이지 -->
-
         <div id="ctf" class="page">
-
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-
             <h1>🛡️ CTF / Wargame</h1>
-
             <p>보안 문제 풀이 Write-up 및 시스템/웹 분석 기록 공간입니다.</p>
-
             <div class="post-box">
-
                 <h3>📌 Web / System Hacking 풀이</h3>
-
                 <p>워게임 문제 분석 및 워크스루(Write-up)를 정리하는 곳입니다.</p>
-
             </div>
-
         </div>
-
-
 
         <!-- 3. Bug Bounty 상세 페이지 -->
-
         <div id="bug" class="page">
-
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-
             <h1>🔍 Bug Bounty</h1>
-
             <p>취약점 연구 및 버그바운티 탐색 기록 공간입니다.</p>
-
             <div class="post-box">
-
                 <h3>📌 취약점 분석 및 보고서</h3>
-
                 <p>발견한 보안 취약점 연구 및 분석 노트를 기록합니다.</p>
-
             </div>
-
         </div>
-
-
 
         <!-- 4. 블로그 / 기술문서 상세 페이지 -->
-
         <div id="doc" class="page">
-
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-
             <h1>📝 블로그 / 기술문서</h1>
-
             <p>보안 및 IT 제반 기술 정리 문서 공간입니다.</p>
-
             <div class="post-box">
-
                 <h3>📌 기술 개념 정리</h3>
-
                 <p>네트워크, OS, 보안 개념 등 스터디한 기술을 요약해 놓는 공간입니다.</p>
-
             </div>
-
         </div>
-
-
 
         <!-- 5. 논문 / 컨퍼런스 상세 페이지 -->
-
         <div id="conf" class="page">
-
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-
             <h1>🎓 논문 / 컨퍼런스</h1>
-
             <p>보안 학술 논문 리뷰 및 컨퍼런스 참관 기록 공간입니다.</p>
-
             <div class="post-box">
-
                 <h3>📌 논문 요약 & 발표 자료</h3>
-
                 <p>읽은 보안 논문 분석이나 세미나 정리 내용을 기록합니다.</p>
-
             </div>
-
         </div>
-
-
 
         <!-- 6. 공모전 / 자격증 상세 페이지 -->
-
         <div id="cert" class="page">
-
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-
             <h1>🏆 공모전 / 자격증</h1>
-
             <p>대외활동, 보안 경진대회 및 자격증 취득 기록 공간입니다.</p>
-
             <div class="post-box">
-
                 <h3>📌 성과 및 이력</h3>
-
                 <p>참여한 공모전 성과와 보안 자격증 준비 과정을 기록합니다.</p>
-
             </div>
-
         </div>
-
-
 
         <!-- 7. 개인공부 상세 페이지 -->
-
         <div id="study" class="page">
-
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-
             <h1>📖 개인공부 (Study & Note)</h1>
-
             <p>전공 공부, 개인 메모, 자습 내용을 자유롭게 기록하는 공간입니다.</p>
-
             <div class="post-box">
-
                 <h3>📌 개인 자습 & 요약 노트</h3>
-
                 <p>수업 내용 복습이나 개인적으로 공부한 자료를 작성하는 공간입니다.</p>
-
             </div>
-
         </div>
-
-
 
         <!-- 메인 홈 화면 -->
-
         <div id="home-view">
+            <!-- 🌐 상단 시스템 스펙 바 -->
+            <div class="system-bar">
+                <div><span class="status-dot"></span>SYSTEM STATUS: ONLINE</div>
+                <div id="live-time">KST --:--:--</div>
+            </div>
 
-            <h1>🔒 개인 블로그</h1>
-
-            
+            <div class="site-header">
+                <h1>🔒 Security & Dev Archive</h1>
+                <button class="theme-toggle-btn" onclick="toggleTheme()">🌓 Theme</button>
+            </div>
 
             <!-- 👋 자기소개 프로필 카드 영역 -->
-
             <div class="profile-card">
-
                 <div class="profile-avatar">👩‍💻</div>
-
                 <div class="profile-info">
-
                     <h2>안녕하세요! 상명대 CodeCure 김민경입니다.</h2>
-
-                    <p>정보보안공학과에 재학중이고 26학번입니다! 아직 배워가는 단계이지만, 이번 활동을 계기로 다양한 보안 및 개발 지식을 차근차근 배워가겠습니다.</p>
-
+                    <p>정보보안공학과에 재학중이고 26학번입니다! 차근차근 배우며 성장하는 개발 및 보안 탐구 기록 공간입니다.</p>
                     <div class="profile-tags">
-
                         <span class="tag">#WebSecurity</span>
-
                         <span class="tag">#SystemSecurity</span>
-
+                        <span class="tag">#DigitalForensics</span>
+                        <span class="tag">#DFIR</span>
                         <span class="tag">#C/Python/Java</span>
-
                         <span class="tag">#StudyNote</span>
-
                     </div>
-
                 </div>
-
             </div>
 
-
+            <!-- 🔍 실시간 카테고리 검색창 -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 카테고리 검색 (예: 개발, CTF, 포렌식, 자격증...)" onkeyup="filterCards()">
+            </div>
 
             <h2>📌 카테고리</h2>
-
-            <div class="grid">
-
-                <a href="#dev">
-
-                    <div class="card"><h3>💻 개발</h3><p>프로그래밍 및 개발 기록</p></div>
-
+            <div class="grid" id="cardGrid">
+                <a href="#dev" class="card-item">
+                    <div class="card"><h3>💻 개발</h3><p>프로그래밍 언어, 알고리즘 및 개발 기록</p></div>
                 </a>
-
-                <a href="#ctf">
-
-                    <div class="card"><h3>🛡️ CTF / Wargame</h3><p>보안 문제 풀이 및 분석</p></div>
-
+                <a href="#ctf" class="card-item">
+                    <div class="card"><h3>🛡️ CTF / Wargame</h3><p>보안 문제 풀이 및 시스템/웹 분석</p></div>
                 </a>
-
-                <a href="#bug">
-
-                    <div class="card"><h3>🔍 Bug Bounty</h3><p>취약점 연구</p></div>
-
+                <a href="#bug" class="card-item">
+                    <div class="card"><h3>🔍 Bug Bounty</h3><p>취약점 분석 및 버그바운티 연구</p></div>
                 </a>
-
-                <a href="#doc">
-
-                    <div class="card"><h3>📝 블로그 / 기술문서</h3><p>기술 정리 문서</p></div>
-
+                <a href="#doc" class="card-item">
+                    <div class="card"><h3>📝 블로그 / 기술문서</h3><p>네트워크, OS, 보안 개념 기술 문서</p></div>
                 </a>
-
-                <a href="#conf">
-
-                    <div class="card"><h3>🎓 논문 / 컨퍼런스</h3><p>보안 자료 정리</p></div>
-
+                <a href="#conf" class="card-item">
+                    <div class="card"><h3>🎓 논문 / 컨퍼런스</h3><p>보안 학술 논문 리뷰 및 세미나 기록</p></div>
                 </a>
-
-                <a href="#cert">
-
-                    <div class="card"><h3>🏆 공모전 / 자격증</h3><p>성과 및 자격증 기록</p></div>
-
+                <a href="#cert" class="card-item">
+                    <div class="card"><h3>🏆 공모전 / 자격증</h3><p>대외활동 성과 및 자격증 준비 기록</p></div>
                 </a>
-
-                <a href="#study">
-
-                    <div class="card"><h3>📖 개인공부</h3><p>자율 학습 및 메모</p></div>
-
+                <a href="#study" class="card-item">
+                    <div class="card"><h3>📖 개인공부</h3><p>전공 자습 복습 및 메모 노트</p></div>
                 </a>
-
             </div>
-
         </div>
-
     </div>
 
-</body>
+    <script>
+        // 1. 실시간 한국 시계 업데이트
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ko-KR', { hour12: false });
+            document.getElementById('live-time').innerText = 'KST ' + timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
 
+        // 2. 다크 / 라이트 모드 토글 기능
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
+
+        // 3. 카테고리 실시간 검색 필터링
+        function filterCards() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.card-item');
+
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(input)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
 </html>
