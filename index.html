@@ -235,19 +235,16 @@
             margin-bottom: 24px;
         }
 
-        .post-count-badge {
-            font-family: 'Fira Code', monospace;
-            font-size: 12px;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            color: var(--accent-cyan);
-            padding: 3px 8px;
-            border-radius: 6px;
-            margin-top: 8px;
-            display: inline-block;
-        }
-
         .post-list { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+
+        .empty-notice {
+            color: var(--text-secondary);
+            font-size: 14px;
+            padding: 40px 0;
+            text-align: center;
+            border: 1px dashed var(--border-color);
+            border-radius: 10px;
+        }
 
         .post-card {
             background: var(--bg-primary);
@@ -255,6 +252,8 @@
             border-radius: 10px;
             padding: 20px;
             transition: transform 0.2s, border-color 0.2s;
+            display: block;
+            color: inherit;
         }
 
         .post-card:hover {
@@ -315,37 +314,10 @@
             <div class="page-header">
                 <h1>💻 개발 (Development)</h1>
                 <p style="color: var(--text-secondary); margin: 6px 0 0 0;">C, Python, Java 기반 프로그래밍 및 알고리즘 학습 기록 공간입니다.</p>
-                <span class="post-count-badge">POSTS: 2</span>
             </div>
-
             <div class="post-list">
-                <div class="post-card">
-                    <div class="post-meta">
-                        <span>🗓️ 2026.10.28</span>
-                        <span>⏱️ 5 min read</span>
-                    </div>
-                    <div class="post-title">C/Python 스네이크 및 카드 게임 가위바위보 콘솔 프로젝트 구현</div>
-                    <div class="post-desc">C언어 표준 함수와 Python을 활용하여 콘솔 기반 인터랙티브 게임 및 입력 예외 처리 구조를 개발하고 기록합니다.</div>
-                    <div class="post-subtags">
-                        <span class="subtag">#C_Language</span>
-                        <span class="subtag">#Python</span>
-                        <span class="subtag">#ConsoleGame</span>
-                    </div>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-meta">
-                        <span>🗓️ 2026.10.15</span>
-                        <span>⏱️ 4 min read</span>
-                    </div>
-                    <div class="post-title">Java 기초 데이터 구조 및 객체지향 핵심 가이드</div>
-                    <div class="post-desc">객체지향 프로그래밍(OOP) 개요 및 자바 기본 클래스 구조, 예외 처리 방식을 복습하고 요약 정리합니다.</div>
-                    <div class="post-subtags">
-                        <span class="subtag">#Java</span>
-                        <span class="subtag">#OOP</span>
-                        <span class="subtag">#StudyNote</span>
-                    </div>
-                </div>
+                <!-- 새 글을 추가할 때는 아래 포맷을 사용하세요 -->
+                <div class="empty-notice">📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!</div>
             </div>
         </div>
 
@@ -355,37 +327,9 @@
             <div class="page-header">
                 <h1>🛡️ CTF / Wargame</h1>
                 <p style="color: var(--text-secondary); margin: 6px 0 0 0;">시스템/웹 워게임 문제 분석 및 Write-up 정리 공간입니다.</p>
-                <span class="post-count-badge">POSTS: 2</span>
             </div>
-
             <div class="post-list">
-                <div class="post-card">
-                    <div class="post-meta">
-                        <span>🗓️ 2026.10.24</span>
-                        <span>⏱️ 8 min read</span>
-                    </div>
-                    <div class="post-title">[Dreamhack] Return Address Overwrite (RAO) 풀이 및 분석</div>
-                    <div class="post-desc">버퍼 오버플로우(BOF) 기본 개념 분석 및 리턴 주소 덮어쓰기 페이로드 작성 과정을 기록한 분석서입니다.</div>
-                    <div class="post-subtags">
-                        <span class="subtag">#SystemHacking</span>
-                        <span class="subtag">#BOF</span>
-                        <span class="subtag">#Dreamhack</span>
-                    </div>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-meta">
-                        <span>🗓️ 2026.10.10</span>
-                        <span>⏱️ 6 min read</span>
-                    </div>
-                    <div class="post-title">[Web] Cross-Site Scripting (XSS) 기초 검증 및 페이로드 연구</div>
-                    <div class="post-desc">Stored/Reflected XSS 공격 자바스크립트 구문 삽입 방식 및 필터링 우회 기법에 대해 분석합니다.</div>
-                    <div class="post-subtags">
-                        <span class="subtag">#WebSecurity</span>
-                        <span class="subtag">#XSS</span>
-                        <span class="subtag">#Wargame</span>
-                    </div>
-                </div>
+                <div class="empty-notice">📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!</div>
             </div>
         </div>
 
@@ -395,23 +339,9 @@
             <div class="page-header">
                 <h1>🔍 Bug Bounty</h1>
                 <p style="color: var(--text-secondary); margin: 6px 0 0 0;">웹/시스템 취약점 탐색 및 취약점 분석 리포트 공간입니다.</p>
-                <span class="post-count-badge">POSTS: 1</span>
             </div>
-
             <div class="post-list">
-                <div class="post-card">
-                    <div class="post-meta">
-                        <span>🗓️ 2026.10.18</span>
-                        <span>⏱️ 7 min read</span>
-                    </div>
-                    <div class="post-title">웹 서버 공격·방어 시뮬레이션 및 차단 룰셋 분석</div>
-                    <div class="post-desc">팀 프로젝트로 진행한 웹 서버 취약점 탐색 및 방화벽 모니터링 로그 분석 실습 보고서입니다.</div>
-                    <div class="post-subtags">
-                        <span class="subtag">#BugBounty</span>
-                        <span class="subtag">#Vulnerability</span>
-                        <span class="subtag">#Defense</span>
-                    </div>
-                </div>
+                <div class="empty-notice">📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!</div>
             </div>
         </div>
 
@@ -421,37 +351,9 @@
             <div class="page-header">
                 <h1>📝 블로그 / 기술문서 (DFIR & DF)</h1>
                 <p style="color: var(--text-secondary); margin: 6px 0 0 0;">디지털 포렌식, DFIR, 네트워크 및 OS 제반 기술 정리 문서 공간입니다.</p>
-                <span class="post-count-badge">POSTS: 2</span>
             </div>
-
             <div class="post-list">
-                <div class="post-card">
-                    <div class="post-meta">
-                        <span>🗓️ 2026.11.02</span>
-                        <span>⏱️ 10 min read</span>
-                    </div>
-                    <div class="post-title">디지털 포렌식(Digital Forensics) 및 메모리 분석 기초 개요</div>
-                    <div class="post-desc">아티팩트 분석, 메모리 포렌식 기본 개념 및 DFIR 응대 체계 기초 요약 정리 문서입니다.</div>
-                    <div class="post-subtags">
-                        <span class="subtag">#DigitalForensics</span>
-                        <span class="subtag">#DFIR</span>
-                        <span class="subtag">#MemoryForensics</span>
-                    </div>
-                </div>
-
-                <div class="post-card">
-                    <div class="post-meta">
-                        <span>🗓️ 2026.09.28</span>
-                        <span>⏱️ 6 min read</span>
-                    </div>
-                    <div class="post-title">WSL2 Ubuntu 환경 구축 및 깃/리눅스 기초 명령어 모음</div>
-                    <div class="post-desc">Windows 환경에서 WSL2를 설치하고 리눅스 커맨드라인 환경 및 Git 명령어를 세팅하는 가이드입니다.</div>
-                    <div class="post-subtags">
-                        <span class="subtag">#Linux</span>
-                        <span class="subtag">#WSL2</span>
-                        <span class="subtag">#Environment</span>
-                    </div>
-                </div>
+                <div class="empty-notice">📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!</div>
             </div>
         </div>
 
@@ -461,23 +363,9 @@
             <div class="page-header">
                 <h1>🎓 논문 / 컨퍼런스</h1>
                 <p style="color: var(--text-secondary); margin: 6px 0 0 0;">보안 학술 논문 리뷰 및 보안 컨퍼런스/세미나 참관 기록 공간입니다.</p>
-                <span class="post-count-badge">POSTS: 1</span>
             </div>
-
             <div class="post-list">
-                <div class="post-card">
-                    <div class="post-meta">
-                        <span>🗓️ 2026.10.05</span>
-                        <span>⏱️ 6 min read</span>
-                    </div>
-                    <div class="post-title">최신 웹 취약점 동향 및 보안 세미나 참관 요약</div>
-                    <div class="post-desc">보안 컨퍼런스에서 다뤄진 최신 DevSecOps 및 웹 보안 공격 패러다임 리뷰 기록입니다.</div>
-                    <div class="post-subtags">
-                        <span class="subtag">#Conference</span>
-                        <span class="subtag">#SecuritySeminar</span>
-                        <span class="subtag">#DevSecOps</span>
-                    </div>
-                </div>
+                <div class="empty-notice">📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!</div>
             </div>
         </div>
 
@@ -487,23 +375,9 @@
             <div class="page-header">
                 <h1>🏆 공모전 / 자격증</h1>
                 <p style="color: var(--text-secondary); margin: 6px 0 0 0;">대외활동, 보안 경진대회 및 보안 관련 자격증 로드맵 기록 공간입니다.</p>
-                <span class="post-count-badge">POSTS: 1</span>
             </div>
-
             <div class="post-list">
-                <div class="post-card">
-                    <div class="post-meta">
-                        <span>🗓️ 2026.10.12</span>
-                        <span>⏱️ 4 min read</span>
-                    </div>
-                    <div class="post-title">상명대 CodeCure 동아리 활동 및 보안 학습 로드맵</div>
-                    <div class="post-desc">정보보안공학과 CodeCure 동아리에서의 스터디 목표 및 준비 과정 기록입니다.</div>
-                    <div class="post-subtags">
-                        <span class="subtag">#CodeCure</span>
-                        <span class="subtag">#SangmyungUniv</span>
-                        <span class="subtag">#Activity</span>
-                    </div>
-                </div>
+                <div class="empty-notice">📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!</div>
             </div>
         </div>
 
@@ -513,22 +387,9 @@
             <div class="page-header">
                 <h1>📖 개인공부 (Study & Note)</h1>
                 <p style="color: var(--text-secondary); margin: 6px 0 0 0;">전공 수업 복습, 자습 노트, 개인 메모 공간입니다.</p>
-                <span class="post-count-badge">POSTS: 1</span>
             </div>
-
             <div class="post-list">
-                <div class="post-card">
-                    <div class="post-meta">
-                        <span>🗓️ 2026.10.20</span>
-                        <span>⏱️ 5 min read</span>
-                    </div>
-                    <div class="post-title">1학년 전공 기초 - 컴퓨팅 사고 및 프로그래밍 복습</div>
-                    <div class="post-desc">1학기/2학기 전공 수업 내용 핵심 요약 및 개인 복습을 위해 작성한 서브노트입니다.</div>
-                    <div class="post-subtags">
-                        <span class="subtag">#MajorClass</span>
-                        <span class="subtag">#ReviewNote</span>
-                    </div>
-                </div>
+                <div class="empty-notice">📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!</div>
             </div>
         </div>
 
