@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security & Dev Archive | 김민경</title>
+    <title>DFIR & Cyber Security Archive | 김민경</title>
     <!-- 트렌디한 모던 폰트 (Inter & Fira Code) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,6 @@
             --input-bg: #011627;
         }
 
-        /* 라이트 모드 변수 정의 */
         body.light-mode {
             --bg-primary: #f6f8fa;
             --bg-secondary: #ffffff;
@@ -53,7 +52,6 @@
 
         .container { max-width: 860px; margin: 0 auto; position: relative; }
 
-        /* 상단 네비게이션 & 시스템 바 */
         .system-bar {
             display: flex;
             align-items: center;
@@ -78,7 +76,6 @@
             box-shadow: 0 0 8px var(--accent-green);
         }
 
-        /* 메인 헤더 */
         .site-header {
             display: flex;
             align-items: center;
@@ -98,7 +95,6 @@
             gap: 10px;
         }
 
-        /* 테마 토글 버튼 */
         .theme-toggle-btn {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -116,7 +112,6 @@
             color: var(--accent-blue);
         }
 
-        /* 자기소개 프로필 카드 (글래스모피즘 효과) */
         .profile-card { 
             background: var(--bg-card); 
             backdrop-filter: blur(12px);
@@ -161,10 +156,7 @@
             font-family: 'Fira Code', monospace;
         }
 
-        /* 실시간 검색 영역 */
-        .search-container {
-            margin-bottom: 24px;
-        }
+        .search-container { margin-bottom: 24px; }
 
         .search-input {
             width: 100%;
@@ -184,7 +176,6 @@
             box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
         }
 
-        /* 메인 홈 카테고리 그리드 */
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 16px; }
 
         .card { 
@@ -219,7 +210,7 @@
         .card h3 { color: var(--accent-blue); margin: 0 0 8px 0; font-size: 16px; }
         .card p { color: var(--text-secondary); margin: 0; font-size: 13.5px; }
 
-        /* 상세 페이지 스타일 */
+        /* 상세 페이지 디자인 */
         .page { display: none; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 14px; padding: 32px; margin-top: 20px; }
         .page:target { display: block; }
         .page:target ~ #home-view { display: none; }
@@ -238,12 +229,72 @@
 
         .back-btn:hover { color: var(--accent-cyan); text-decoration: underline; }
 
-        .post-box { 
-            background: var(--bg-primary); 
-            border: 1px solid var(--border-color); 
-            border-radius: 10px; 
-            padding: 20px; 
-            margin-top: 20px; 
+        .page-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+
+        .post-count-badge {
+            font-family: 'Fira Code', monospace;
+            font-size: 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--accent-cyan);
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        .post-list { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+
+        .post-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .post-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateX(4px);
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-family: 'Fira Code', monospace;
+            margin-bottom: 8px;
+        }
+
+        .post-title {
+            color: var(--text-primary);
+            font-size: 17px;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+        }
+
+        .post-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin: 0 0 14px 0;
+            line-height: 1.5;
+        }
+
+        .post-subtags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .subtag {
+            font-size: 11px;
+            font-family: 'Fira Code', monospace;
+            background: var(--bg-secondary);
+            color: var(--accent-cyan);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
         }
 
         a { text-decoration: none; color: inherit; }
@@ -261,77 +312,223 @@
         <!-- 1. 개발 상세 페이지 -->
         <div id="dev" class="page">
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-            <h1>💻 개발 (Development)</h1>
-            <p>프로그래밍 언어, 알고리즘, 웹/시스템 개발 기록 공간입니다.</p>
-            <div class="post-box">
-                <h3>📌 C / Python / Java 학습 기록</h3>
-                <p>여기에 공부한 개발 내용이나 코드 포스팅을 작성할 수 있습니다.</p>
+            <div class="page-header">
+                <h1>💻 개발 (Development)</h1>
+                <p style="color: var(--text-secondary); margin: 6px 0 0 0;">C, Python, Java 기반 프로그래밍 및 알고리즘 학습 기록 공간입니다.</p>
+                <span class="post-count-badge">POSTS: 2</span>
+            </div>
+
+            <div class="post-list">
+                <div class="post-card">
+                    <div class="post-meta">
+                        <span>🗓️ 2026.10.28</span>
+                        <span>⏱️ 5 min read</span>
+                    </div>
+                    <div class="post-title">C/Python 스네이크 및 카드 게임 가위바위보 콘솔 프로젝트 구현</div>
+                    <div class="post-desc">C언어 표준 함수와 Python을 활용하여 콘솔 기반 인터랙티브 게임 및 입력 예외 처리 구조를 개발하고 기록합니다.</div>
+                    <div class="post-subtags">
+                        <span class="subtag">#C_Language</span>
+                        <span class="subtag">#Python</span>
+                        <span class="subtag">#ConsoleGame</span>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-meta">
+                        <span>🗓️ 2026.10.15</span>
+                        <span>⏱️ 4 min read</span>
+                    </div>
+                    <div class="post-title">Java 기초 데이터 구조 및 객체지향 핵심 가이드</div>
+                    <div class="post-desc">객체지향 프로그래밍(OOP) 개요 및 자바 기본 클래스 구조, 예외 처리 방식을 복습하고 요약 정리합니다.</div>
+                    <div class="post-subtags">
+                        <span class="subtag">#Java</span>
+                        <span class="subtag">#OOP</span>
+                        <span class="subtag">#StudyNote</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- 2. CTF / Wargame 상세 페이지 -->
         <div id="ctf" class="page">
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-            <h1>🛡️ CTF / Wargame</h1>
-            <p>보안 문제 풀이 Write-up 및 시스템/웹 분석 기록 공간입니다.</p>
-            <div class="post-box">
-                <h3>📌 Web / System Hacking 풀이</h3>
-                <p>워게임 문제 분석 및 워크스루(Write-up)를 정리하는 곳입니다.</p>
+            <div class="page-header">
+                <h1>🛡️ CTF / Wargame</h1>
+                <p style="color: var(--text-secondary); margin: 6px 0 0 0;">시스템/웹 워게임 문제 분석 및 Write-up 정리 공간입니다.</p>
+                <span class="post-count-badge">POSTS: 2</span>
+            </div>
+
+            <div class="post-list">
+                <div class="post-card">
+                    <div class="post-meta">
+                        <span>🗓️ 2026.10.24</span>
+                        <span>⏱️ 8 min read</span>
+                    </div>
+                    <div class="post-title">[Dreamhack] Return Address Overwrite (RAO) 풀이 및 분석</div>
+                    <div class="post-desc">버퍼 오버플로우(BOF) 기본 개념 분석 및 리턴 주소 덮어쓰기 페이로드 작성 과정을 기록한 분석서입니다.</div>
+                    <div class="post-subtags">
+                        <span class="subtag">#SystemHacking</span>
+                        <span class="subtag">#BOF</span>
+                        <span class="subtag">#Dreamhack</span>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-meta">
+                        <span>🗓️ 2026.10.10</span>
+                        <span>⏱️ 6 min read</span>
+                    </div>
+                    <div class="post-title">[Web] Cross-Site Scripting (XSS) 기초 검증 및 페이로드 연구</div>
+                    <div class="post-desc">Stored/Reflected XSS 공격 자바스크립트 구문 삽입 방식 및 필터링 우회 기법에 대해 분석합니다.</div>
+                    <div class="post-subtags">
+                        <span class="subtag">#WebSecurity</span>
+                        <span class="subtag">#XSS</span>
+                        <span class="subtag">#Wargame</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- 3. Bug Bounty 상세 페이지 -->
         <div id="bug" class="page">
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-            <h1>🔍 Bug Bounty</h1>
-            <p>취약점 연구 및 버그바운티 탐색 기록 공간입니다.</p>
-            <div class="post-box">
-                <h3>📌 취약점 분석 및 보고서</h3>
-                <p>발견한 보안 취약점 연구 및 분석 노트를 기록합니다.</p>
+            <div class="page-header">
+                <h1>🔍 Bug Bounty</h1>
+                <p style="color: var(--text-secondary); margin: 6px 0 0 0;">웹/시스템 취약점 탐색 및 취약점 분석 리포트 공간입니다.</p>
+                <span class="post-count-badge">POSTS: 1</span>
+            </div>
+
+            <div class="post-list">
+                <div class="post-card">
+                    <div class="post-meta">
+                        <span>🗓️ 2026.10.18</span>
+                        <span>⏱️ 7 min read</span>
+                    </div>
+                    <div class="post-title">웹 서버 공격·방어 시뮬레이션 및 차단 룰셋 분석</div>
+                    <div class="post-desc">팀 프로젝트로 진행한 웹 서버 취약점 탐색 및 방화벽 모니터링 로그 분석 실습 보고서입니다.</div>
+                    <div class="post-subtags">
+                        <span class="subtag">#BugBounty</span>
+                        <span class="subtag">#Vulnerability</span>
+                        <span class="subtag">#Defense</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- 4. 블로그 / 기술문서 상세 페이지 -->
         <div id="doc" class="page">
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-            <h1>📝 블로그 / 기술문서</h1>
-            <p>보안 및 IT 제반 기술 정리 문서 공간입니다.</p>
-            <div class="post-box">
-                <h3>📌 기술 개념 정리</h3>
-                <p>네트워크, OS, 보안 개념 등 스터디한 기술을 요약해 놓는 공간입니다.</p>
+            <div class="page-header">
+                <h1>📝 블로그 / 기술문서 (DFIR & DF)</h1>
+                <p style="color: var(--text-secondary); margin: 6px 0 0 0;">디지털 포렌식, DFIR, 네트워크 및 OS 제반 기술 정리 문서 공간입니다.</p>
+                <span class="post-count-badge">POSTS: 2</span>
+            </div>
+
+            <div class="post-list">
+                <div class="post-card">
+                    <div class="post-meta">
+                        <span>🗓️ 2026.11.02</span>
+                        <span>⏱️ 10 min read</span>
+                    </div>
+                    <div class="post-title">디지털 포렌식(Digital Forensics) 및 메모리 분석 기초 개요</div>
+                    <div class="post-desc">아티팩트 분석, 메모리 포렌식 기본 개념 및 DFIR 응대 체계 기초 요약 정리 문서입니다.</div>
+                    <div class="post-subtags">
+                        <span class="subtag">#DigitalForensics</span>
+                        <span class="subtag">#DFIR</span>
+                        <span class="subtag">#MemoryForensics</span>
+                    </div>
+                </div>
+
+                <div class="post-card">
+                    <div class="post-meta">
+                        <span>🗓️ 2026.09.28</span>
+                        <span>⏱️ 6 min read</span>
+                    </div>
+                    <div class="post-title">WSL2 Ubuntu 환경 구축 및 깃/리눅스 기초 명령어 모음</div>
+                    <div class="post-desc">Windows 환경에서 WSL2를 설치하고 리눅스 커맨드라인 환경 및 Git 명령어를 세팅하는 가이드입니다.</div>
+                    <div class="post-subtags">
+                        <span class="subtag">#Linux</span>
+                        <span class="subtag">#WSL2</span>
+                        <span class="subtag">#Environment</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- 5. 논문 / 컨퍼런스 상세 페이지 -->
         <div id="conf" class="page">
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-            <h1>🎓 논문 / 컨퍼런스</h1>
-            <p>보안 학술 논문 리뷰 및 컨퍼런스 참관 기록 공간입니다.</p>
-            <div class="post-box">
-                <h3>📌 논문 요약 & 발표 자료</h3>
-                <p>읽은 보안 논문 분석이나 세미나 정리 내용을 기록합니다.</p>
+            <div class="page-header">
+                <h1>🎓 논문 / 컨퍼런스</h1>
+                <p style="color: var(--text-secondary); margin: 6px 0 0 0;">보안 학술 논문 리뷰 및 보안 컨퍼런스/세미나 참관 기록 공간입니다.</p>
+                <span class="post-count-badge">POSTS: 1</span>
+            </div>
+
+            <div class="post-list">
+                <div class="post-card">
+                    <div class="post-meta">
+                        <span>🗓️ 2026.10.05</span>
+                        <span>⏱️ 6 min read</span>
+                    </div>
+                    <div class="post-title">최신 웹 취약점 동향 및 보안 세미나 참관 요약</div>
+                    <div class="post-desc">보안 컨퍼런스에서 다뤄진 최신 DevSecOps 및 웹 보안 공격 패러다임 리뷰 기록입니다.</div>
+                    <div class="post-subtags">
+                        <span class="subtag">#Conference</span>
+                        <span class="subtag">#SecuritySeminar</span>
+                        <span class="subtag">#DevSecOps</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- 6. 공모전 / 자격증 상세 페이지 -->
         <div id="cert" class="page">
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-            <h1>🏆 공모전 / 자격증</h1>
-            <p>대외활동, 보안 경진대회 및 자격증 취득 기록 공간입니다.</p>
-            <div class="post-box">
-                <h3>📌 성과 및 이력</h3>
-                <p>참여한 공모전 성과와 보안 자격증 준비 과정을 기록합니다.</p>
+            <div class="page-header">
+                <h1>🏆 공모전 / 자격증</h1>
+                <p style="color: var(--text-secondary); margin: 6px 0 0 0;">대외활동, 보안 경진대회 및 보안 관련 자격증 로드맵 기록 공간입니다.</p>
+                <span class="post-count-badge">POSTS: 1</span>
+            </div>
+
+            <div class="post-list">
+                <div class="post-card">
+                    <div class="post-meta">
+                        <span>🗓️ 2026.10.12</span>
+                        <span>⏱️ 4 min read</span>
+                    </div>
+                    <div class="post-title">상명대 CodeCure 동아리 활동 및 보안 학습 로드맵</div>
+                    <div class="post-desc">정보보안공학과 CodeCure 동아리에서의 스터디 목표 및 준비 과정 기록입니다.</div>
+                    <div class="post-subtags">
+                        <span class="subtag">#CodeCure</span>
+                        <span class="subtag">#SangmyungUniv</span>
+                        <span class="subtag">#Activity</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- 7. 개인공부 상세 페이지 -->
         <div id="study" class="page">
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-            <h1>📖 개인공부 (Study & Note)</h1>
-            <p>전공 공부, 개인 메모, 자습 내용을 자유롭게 기록하는 공간입니다.</p>
-            <div class="post-box">
-                <h3>📌 개인 자습 & 요약 노트</h3>
-                <p>수업 내용 복습이나 개인적으로 공부한 자료를 작성하는 공간입니다.</p>
+            <div class="page-header">
+                <h1>📖 개인공부 (Study & Note)</h1>
+                <p style="color: var(--text-secondary); margin: 6px 0 0 0;">전공 수업 복습, 자습 노트, 개인 메모 공간입니다.</p>
+                <span class="post-count-badge">POSTS: 1</span>
+            </div>
+
+            <div class="post-list">
+                <div class="post-card">
+                    <div class="post-meta">
+                        <span>🗓️ 2026.10.20</span>
+                        <span>⏱️ 5 min read</span>
+                    </div>
+                    <div class="post-title">1학년 전공 기초 - 컴퓨팅 사고 및 프로그래밍 복습</div>
+                    <div class="post-desc">1학기/2학기 전공 수업 내용 핵심 요약 및 개인 복습을 위해 작성한 서브노트입니다.</div>
+                    <div class="post-subtags">
+                        <span class="subtag">#MajorClass</span>
+                        <span class="subtag">#ReviewNote</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -344,7 +541,7 @@
             </div>
 
             <div class="site-header">
-                <h1>🔒 Security & Dev Archive</h1>
+                <h1>🛡️ DFIR & Cyber Security Archive</h1>
                 <button class="theme-toggle-btn" onclick="toggleTheme()">🌓 Theme</button>
             </div>
 
@@ -373,7 +570,7 @@
             <h2>📌 카테고리</h2>
             <div class="grid" id="cardGrid">
                 <a href="#dev" class="card-item">
-                    <div class="card"><h3>💻 개발</h3><p>프로그래밍 언어, 알고리즘 및 개발 기록</p></div>
+                    <div class="card"><h3>💻 개발</h3><p>C, Python, Java 언어 및 개발 기록</p></div>
                 </a>
                 <a href="#ctf" class="card-item">
                     <div class="card"><h3>🛡️ CTF / Wargame</h3><p>보안 문제 풀이 및 시스템/웹 분석</p></div>
@@ -382,13 +579,13 @@
                     <div class="card"><h3>🔍 Bug Bounty</h3><p>취약점 분석 및 버그바운티 연구</p></div>
                 </a>
                 <a href="#doc" class="card-item">
-                    <div class="card"><h3>📝 블로그 / 기술문서</h3><p>네트워크, OS, 보안 개념 기술 문서</p></div>
+                    <div class="card"><h3>📝 블로그 / 기술문서</h3><p>포렌식, DFIR, OS, 네트워크 기술 문서</p></div>
                 </a>
                 <a href="#conf" class="card-item">
                     <div class="card"><h3>🎓 논문 / 컨퍼런스</h3><p>보안 학술 논문 리뷰 및 세미나 기록</p></div>
                 </a>
                 <a href="#cert" class="card-item">
-                    <div class="card"><h3>🏆 공모전 / 자격증</h3><p>대외활동 성과 및 자격증 준비 기록</p></div>
+                    <div class="card"><h3>🏆 공모전 / 자격증</h3><p>동아리 성과 및 자격증 로드맵 기록</p></div>
                 </a>
                 <a href="#study" class="card-item">
                     <div class="card"><h3>📖 개인공부</h3><p>전공 자습 복습 및 메모 노트</p></div>
@@ -398,7 +595,6 @@
     </div>
 
     <script>
-        // 1. 실시간 한국 시계 업데이트
         function updateClock() {
             const now = new Date();
             const timeString = now.toLocaleTimeString('ko-KR', { hour12: false });
@@ -407,12 +603,10 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // 2. 다크 / 라이트 모드 토글 기능
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
         }
 
-        // 3. 카테고리 실시간 검색 필터링
         function filterCards() {
             const input = document.getElementById('searchInput').value.toLowerCase();
             const cards = document.querySelectorAll('.card-item');
