@@ -389,7 +389,8 @@
             </div>
         </div>
 
- <!-- ==================== [페이지 2] VAPD 논문 심층 리뷰 상세 본문 ==================== -->
+
+<!-- ==================== [페이지 2] VAPD 논문 심층 리뷰 상세 본문 ==================== -->
 <div id="vapd-review" class="page">
     <style>
         /* VAPD 리뷰 전용 깔끔한 카드 & 그리드 스타일 */
@@ -412,6 +413,7 @@
             padding-left: 10px;
             border-left: 4px solid var(--accent-blue, #3b82f6);
         }
+        /* 메타데이터 요약 카드 */
         .paper-meta-card {
             background: rgba(59, 130, 246, 0.06);
             border: 1px solid rgba(59, 130, 246, 0.25);
@@ -437,6 +439,7 @@
             display: block;
             margin-bottom: 2px;
         }
+        /* 개념 카드 그리드 */
         .concept-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -473,6 +476,7 @@
             padding-left: 18px;
             margin-top: 6px;
         }
+        /* 흐름도 박스 */
         .flow-diagram {
             background: rgba(16, 185, 129, 0.06);
             border: 1px dashed rgba(16, 185, 129, 0.4);
@@ -484,6 +488,7 @@
             color: #a7f3d0;
             font-weight: 500;
         }
+        /* 비교 테이블 */
         .styled-table {
             width: 100%;
             border-collapse: collapse;
@@ -507,6 +512,7 @@
         .styled-table tr:nth-child(even) {
             background: rgba(255, 255, 255, 0.02);
         }
+        /* 성과 하이라이트 배지 */
         .stat-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -531,6 +537,7 @@
             font-size: 0.82rem;
             color: var(--text-secondary, #d1d5db);
         }
+        /* 한계점 & Action Plan 박스 */
         .callout-box {
             background: rgba(255, 255, 255, 0.03);
             border-left: 4px solid #f59e0b;
@@ -550,7 +557,7 @@
     </style>
 
     <a href="#conf" class="back-btn">← 논문/컨퍼런스 목록으로 돌아가기</a>
-
+    
     <div class="page-header">
         <span class="subtag">USENIX Security '25</span>
         <span class="subtag">Paper Review</span>
@@ -558,8 +565,9 @@
         <h1 style="margin-top:12px; line-height: 1.35;">🎓 [논문 심층 리뷰] VAPD: An Anomaly Detection Model for PDF Malware Forensics with Adversarial Robustness</h1>
         <p style="color: var(--text-secondary); margin: 8px 0 0 0; font-size: 0.92rem;">🗓️ 2026.11.07 &nbsp;|&nbsp; ✍️ 작성자: 김민경 (정보보안공학과)</p>
     </div>
-
+    
     <div class="post-content">
+        <!-- 1. 선정 논문 정보 카드 -->
         <div class="paper-meta-card">
             <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 12px; color: #93c5fd;">📌 1. 선정 논문 정보</div>
             <div class="meta-grid">
@@ -581,21 +589,184 @@
             </div>
         </div>
 
+        <!-- 2. 논문을 읽기 전 사전 정리 -->
         <div class="review-section">
             <h2>2. 논문을 읽기 전 사전 정리 (이 논문이 속한 분야와 기초 개념)</h2>
             <div class="concept-grid">
-                <!-- 기존 사전 정리 카드 8개 -->
-                <!-- 이 부분은 사용자가 보낸 원본 코드와 동일하게 유지 -->
+                <div class="concept-card">
+                    <div class="concept-title">📄 1. PDF와 악성 PDF</div>
+                    <p>PDF는 문서의 글자와 이미지뿐만 아니라 여러 객체, 스크립트, 첨부파일 등의 정보를 포함할 수 있는 문서 형식이다.</p>
+                    <p style="margin-top: 8px; font-weight: 600; color: #93c5fd;">[PDF 파일은 크게 4가지 영역으로 구성]</p>
+                    <ul>
+                        <li><b>Header:</b> PDF 버전 등의 기본 정보</li>
+                        <li><b>Body:</b> 실제 문서 내용과 여러 객체가 저장되는 부분</li>
+                        <li><b>Cross-reference Table:</b> 각 객체가 파일의 어느 위치에 있는지 알려주는 정보</li>
+                        <li><b>Trailer:</b> 문서의 루트 객체와 파일을 읽기 위한 시작 정보 등을 포함</li>
+                    </ul>
+                    <p style="margin-top: 8px; font-weight: 600; color: #93c5fd;">[기초 용어]</p>
+                    <ul>
+                        <li><b>Object(객체):</b> PDF 내부에 존재하는 개별 데이터 단위</li>
+                        <li><b>Stream(스트림):</b> 이미지, 글꼴, 스크립트 등의 데이터가 저장될 수 있는 영역</li>
+                        <li><b>JavaScript:</b> PDF 내부에서 특정 동작을 수행하는 데 사용될 수 있는 스크립트</li>
+                        <li><b>Payload(페이로드):</b> 공격자가 실제로 실행하거나 전달하려는 악성 데이터</li>
+                    </ul>
+                    <p style="margin-top: 10px; font-size: 0.88rem; color: #f87171;">⚠️ 악성 PDF를 탐지하려면 파일이 정상적으로 열리는지만 확인하는 것이 아니라 내부 객체와 구조까지 분석해야 함</p>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-title">🤖 2. 머신러닝 기반 악성코드 탐지</div>
+                    <p>머신러닝 기반 악성코드 탐지는 정상 파일과 악성 파일의 특징을 분석하여 새로운 파일이 어느 쪽에 해당하는지 판단하는 방식이다.</p>
+                    <p style="margin-top: 8px; font-weight: 600; color: #93c5fd;">[중요 용어]</p>
+                    <ul>
+                        <li><b>지도학습:</b> 정상, 악성처럼 정답이 표시된 데이터를 이용해 학습하는 방식</li>
+                        <li><b>분류:</b> 입력 데이터를 정상 또는 악성 등 정해진 범주로 구분하는 작업</li>
+                        <li><b>특징:</b> 모델이 데이터를 분석할 때 사용하는 정보</li>
+                        <li><b>이진 분류:</b> 두 가지 범주 중 하나로 분류하는 방식</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-title">⚔️ 3. 적대적 공격</div>
+                    <p>공격자가 인공지능 모델을 속여 잘못된 결과를 내도록 입력 데이터를 의도적으로 변형하는 공격이다.</p>
+                    <p style="font-size: 0.86rem; margin: 6px 0; color: var(--text-secondary);">*이 논문에서는 악성 PDF의 기능은 유지하면서 PDF의 특징이나 구조를 변형해 탐지 모델이 정상 파일이라고 판단하도록 유도하는 상황을 다룬다.</p>
+                    <div class="flow-diagram">
+                        원본 악성 PDF (악성 탐지)<br>↓<br>변형된 악성 PDF (악성 기능 유지, 특징 변경)<br>↓<br>기존 탐지 모델 (정상으로 오인 가능성)
+                    </div>
+                    <p style="margin-top: 6px; font-weight: 600; color: #f87171; text-align: center;">파일은 악성 기능은 그대로인데 모델의 판단만 잘못되도록 유도한다는 것이다!</p>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-title">🛡️ 4. 적대적 강인성</div>
+                    <p>앞에서 설명한 적대적 공격에 대응하는 모델의 능력이다. 공격자가 입력 데이터를 변형하더라도 모델이 올바른 판단을 유지할 수 있는 능력을 의미한다.</p>
+                    <p style="margin-top: 8px; font-weight: 600; color: #93c5fd;">[적대적 공격 & 적대적 강인성]</p>
+                    <ul>
+                        <li><b>적대적 공격:</b> 모델을 속이려는 공격자의 행동</li>
+                        <li><b>적대적 강인성:</b> 그러한 공격에도 올바른 판단을 유지하는 모델의 능력</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-title">🔍 5. 이상 탐지</div>
+                    <p>대부분의 데이터에서 일반적으로 나타나는 패턴과 크게 다른 데이터를 찾아내는 기술이다.</p>
+                    <p style="font-size: 0.86rem; margin: 6px 0; color: var(--text-secondary);">*예시: 평소와 다른 시간에 로그인하거나 평소와 다른 방식으로 시스템에 접근하는 행동을 탐지하는 것</p>
+                    <p style="margin-top: 6px; font-size: 0.88rem;">악성코드 탐지에서는 정상 파일이 다수 존재하고 악성 파일은 정상적인 패턴에서 벗어나는 경우가 있다는 점을 활용할 수 있다.</p>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-title">🧠 6. 오토인코더와 VAE</div>
+                    <p>오토인코더는 입력 데이터를 압축했다가 다시 원래 형태와 비슷하게 복원하는 인공신경망이다.</p>
+                    <ul>
+                        <li><b>Encoder:</b> 입력 데이터를 압축하는 부분</li>
+                        <li><b>Latent Space:</b> 압축된 특징을 표현하는 공간</li>
+                        <li><b>Decoder:</b> 압축된 정보를 바탕으로 입력 데이터를 복원하는 부분</li>
+                    </ul>
+                    <p style="margin-top: 8px; font-size: 0.88rem;">→ VAE는 일반 오토인코더와 달리 잠재 공간을 확률분포로 모델링하는 방식이다. *이 논문은 VAE를 재구성 모델로 활용해 정상 PDF의 특징을 학습한다.</p>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-title">📉 7. 재구성 오차</div>
+                    <p>원본 데이터와 모델이 복원한 데이터 사이의 차이를 의미한다.</p>
+                    <ul>
+                        <li><b>정상 PDF:</b> 모델이 학습한 패턴과 유사하므로 비교적 잘 복원할 수 있음 (오차 작음)</li>
+                        <li><b>악성 PDF:</b> 학습한 정상 패턴과 차이가 있어 복원 오차가 커질 수 있음 (오차 큼)</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-title">🕵️ 8. 디지털 포렌식과 위치 식별</div>
+                    <p>디지털 포렌식은 디지털 기기나 파일에 남아 있는 정보를 분석하여 사건의 원인과 흔적을 파악하는 분야이다.</p>
+                    <p style="margin-top: 6px; font-weight: 600; color: #93c5fd;">*PDF가 악성으로 판단되었다면 보안 분석가가 알고 싶어 하는 것:</p>
+                    <ul>
+                        <li>어떤 객체가 의심스러운가?</li>
+                        <li>어떤 경로를 통해 해당 객체에 도달하는가?</li>
+                        <li>어떤 영역에서 정상적인 구조와 차이가 발생했는가?</li>
+                    </ul>
+                    <p style="margin-top: 6px; font-size: 0.88rem; color: #34d399;">→ VAPD는 이러한 분석을 지원하기 위해 이상 위치 식별 기능을 제안한다.</p>
+                </div>
             </div>
         </div>
 
+        <!-- 3. 본문 리뷰 (기, 승, 전, 결) -->
         <div class="review-section">
             <h2>3. 본문 리뷰 (기·승·전·결 구조)</h2>
 
-            <!-- (기), (승) 및 실험 결과 부분은 기존 코드 그대로 유지 -->
+            <h3>(기) 등장 배경 및 기존 연구의 한계</h3>
+            <p><b>이 논문의 등장 배경:</b> PDF는 이메일 첨부파일이나 웹에서 문서를 전달할 때 널리 사용되지만 내부 객체나 자바스크립트 기능을 악용해 악성 코드를 숨길 수 있다. 이에 따라 PDF의 구조와 특징을 분석하는 머신러닝 기반 악성 PDF 탐지 기술이 연구되어 왔다. 하지만 Hidost와 PDFrate 같은 기존 탐지 모델은 공격자가 PDF의 구조나 특징을 변형하는 적대적 공격에 취약하다는 한계가 있었다. 또한 파일이 악성인지 여부는 판단할 수 있어도 내부의 어떤 부분이 의심스러운지 구체적으로 파악하기 어려웠다. 이러한 문제를 해결하기 위해 저자들은 적대적 공격에 강하면서 PDF 내부의 이상 위치까지 식별할 수 있는 새로운 탐지 모델의 필요성을 제시했다.</p>
+            
+            <p style="margin-top: 14px; font-weight: 600; color: #93c5fd;">이 논문이 다루는 문제는 무엇인가?</p>
+            <ol style="margin: 6px 0 14px 0; padding-left: 20px; line-height: 1.6;">
+                <li><b>기존 머신러닝 기반 악성 PDF 탐지 모델이 적대적 공격에 취약하다는 문제</b> → 공격자가 악성 PDF의 구조나 특징을 의도적으로 변형하면 기존 모델이 이를 정상 파일로 오인할 수 있다.</li>
+                <li><b>기존 탐지 모델이 악성 여부만 판단하고 구체적인 이상 위치를 알려주지 못한다는 문제</b> → 악성 파일이라는 사실을 알아내더라도 파일 내부에서 어떤 객체나 영역이 이상한지 알 수 없다면 보안 분석가가 추가적인 분석을 수행해야 한다.</li>
+            </ol>
+            <p style="font-size: 0.9rem; color: #34d399; font-weight: 600;">*이 논문은 악성 PDF 탐지뿐만 아니라 적대적 공격에 대한 강인성과 이상 위치 식별까지 함께 해결하고자 한다.</p>
+
+            <p style="margin-top: 14px; font-weight: 600; color: #93c5fd;">왜 이 문제가 중요한가?</p>
+            <ul style="margin: 6px 0 14px 0; padding-left: 20px; line-height: 1.6;">
+                <li>PDF는 이메일 첨부파일이나 웹 환경에서 널리 사용되고 내부 자바스크립트나 첨부 파일 등의 기능이 악성 행위에 악용될 수 있다.</li>
+                <li>공격자가 악성 기능을 유지하면서 파일을 변형하여 탐지 모델을 우회한다면 기존 보안 시스템의 탐지 성능이 떨어질 수 있다.</li>
+                <li>악성 여부만 판단하고 내부의 이상 위치를 제공하지 못한다면 보안 분석가가 직접 파일을 분석해야 하므로 침해사고 대응이 늦어질 수 있다.</li>
+                <li>악성 PDF를 정확하게 탐지하면서도 변형된 공격에 대응하고 실제 이상이 발생한 위치까지 알려주는 기술이 중요하다.</li>
+            </ul>
+
+            <p style="margin-top: 14px; font-weight: 600; color: #93c5fd;">기존 연구와 기존 방식의 한계는 무엇인가?</p>
+            
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th style="width: 22%;">기존 방식 / 연구</th>
+                        <th style="width: 38%;">작동 방식 및 특징</th>
+                        <th style="width: 40%;">결정적 한계점</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Hidost</b></td>
+                        <td>PDF 구조 경로를 Bag-of-Paths 방식으로 추출 후 SVM 분류 (객체 구조·순서 분석)</td>
+                        <td>구조적 특징을 변형하는 적대적 샘플에 취약, 구체적인 이상 객체 위치 제공 불가</td>
+                    </tr>
+                    <tr>
+                        <td><b>PDFrate</b></td>
+                        <td>메타데이터와 구조적 정보에서 202개 수치형 특징(객체 수, 스트림 크기 등) 추출 후 포레스트 분류</td>
+                        <td>공격자가 PDF의 특징을 의도적으로 변형하면 탐지를 쉽게 회피함</td>
+                    </tr>
+                    <tr>
+                        <td><b>RTM</b></td>
+                        <td>구조적 특징 기반 강건성 속성 정의 및 기호적 구간 분석 활용 학습</td>
+                        <td>높은 계산 복잡도, 기준 모델 대비 학습 시간 <b>약 11배 증가</b>, 오탐률 1.74% 증가, 수동 속성 정의 어려움</td>
+                    </tr>
+                    <tr>
+                        <td><b>기존 적대적 학습</b></td>
+                        <td>공격자가 만든 적대적 샘플을 학습 데이터에 추가하여 모델 훈련</td>
+                        <td>고품질 샘플 생성 시간·비용 과다, 학습 비용 증가, 오탐률 상승</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout-box" style="border-left-color: #3b82f6; background: rgba(59,130,246,0.05);">
+                <b>🎯 논문에서 해결하려는 핵심 문제</b><br>
+                기존 방식은 악성 PDF를 분류하는 데 높은 성능을 보였지만 공격자가 파일의 구조나 특징을 변형하면 탐지를 회피할 수 있었으며, 악성으로 판단한 파일 내부의 구체적인 이상 위치를 식별하는 데에도 한계가 있었다. 또한 적대적 학습을 통해 강인성을 높이려는 방식은 높은 학습 비용과 오탐률 증가라는 문제를 가지고 있었다. 저자들은 이러한 문제를 해결하기 위해 <b>정상 PDF만을 학습하는 재구성 기반 이상 탐지 방식</b>을 제안하였다.
+            </div>
+
+            <h3>(승) 핵심 아이디어 및 방법론</h3>
+            <p><b>저자들의 핵심 아이디어 및 접근 방향:</b> 기본 악성 PDF 탐지 기술이 악성 여부만 구분하고 구체적인 이상 위치를 알려주지 못한다는 점에 주목했다. 또한 적대적 공격에 대응하기 위해 악성 샘플을 추가로 학습시키는 방식은 높은 계산 비용과 오탐률 증가 등의 문제가 있다고 보았다. 그래서 저자들은 악성 PDF를 직접 학습시키기보다 <b>정상 PDF의 구조적 특징을 먼저 학습하고 정상적인 패턴에서 벗어나는 파일을 이상으로 판단하는 방식</b>을 제안하였고, 특히 입력 데이터와 복원 데이터의 차이를 활용하면 악성 여부뿐만 아니라 이상이 발생한 위치까지 파악할 수 있다고 판단하였다. 이러한 바탕으로 <b>VAPD(VAE-based Anomaly detection for PDF malware Detection)</b> 모델을 설계하였다. VAPD의 핵심 목표는 악성 PDF 탐지와 내부 이상 위치 식별이라는 두 가지 포렌식 기능을 함께 제공하는 것이다.</p>
+            
+            <div class="concept-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 16px;">
+                <div class="concept-card">
+                    <div class="concept-title">1️⃣ PDF의 구조를 분석하는 방법</div>
+                    <p>VAPD가 PDF의 이상 여부를 판단하려면 먼저 파일 내부의 구조를 이해해야 한다. 이를 위해 PDF 내부의 객체와 연결 관계를 분석하여 구조 트리를 만들고, 객체들이 연결된 경로를 추출한다. 이후 이러한 경로를 숫자로 표현한 특징 벡터로 변환하여 모델이 학습할 수 있도록 한다. 이때 저자들은 기존 연구의 구조적 경로 추출 방식을 활용하면서도 경로와 실제 PDF 객체를 연결하는 <b>Path-Object Mapping Table</b>을 추가하였다. 이는 단순히 이상이 있다는 사실을 알려주는 것을 넘어, 어떤 객체에서 이상이 발생했는지 찾아내기 위한 것이다.</p>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-title">2️⃣ 정상 데이터 학습과 이상 탐지</div>
+                    <p>저자들은 VAE를 활용하여 정상 PDF의 특징을 학습하도록 모델을 구성하였다. VAE는 입력 데이터를 압축한 뒤 다시 복원하는 구조로, 정상 데이터의 특징을 학습하고 이를 재구성하는 데 사용된다. 또한 저자들은 Latent Component를 결합하여 이상 탐지 성능을 보완하였다. 최종적으로 원본과 복원된 데이터의 차이 및 잠재 공간의 분석 결과를 활용해 파일의 이상 여부를 판단한다. 이러한 방식의 중요한 점은 다양한 악성 PDF를 미리 학습 데이터에 포함하지 않아도 된다는 것이다. 저자들은 악성 샘플을 생성하고 추가 학습하는 기존 적대적 학습 방식의 높은 비용을 줄이면서도 탐지 모델의 강인성을 확보하고자 하였다.</p>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-title">3️⃣ 탐지를 넘어 이상 위치까지 찾아내는 방법</div>
+                    <p>저자들이 특히 중요하게 생각한 부분은 악성 여부를 판단하는 것에서 분석을 끝내지 않는다는 점이다. 기존 모델은 파일이 악성이라고 알려주더라도 분석가가 내부의 어떤 부분이 문제인지 다시 조사해야 했다. 이를 보완하기 위해 VAPD는 재구성 과정에서 큰 차이가 나타난 구조적 경로를 확인하고, Path-Object Mapping Table을 이용해 해당 경로와 연결된 객체를 찾아낸다. 한마디로, VAPD는 악성 PDF를 탐지하는 동시에 의심스러운 객체의 위치까지 제공하여 분석가가 문제의 원인을 더 빠르게 파악할 수 있도록 설계되었다. 결과적으로 저자들은 정상 데이터만을 활용한 학습 방식과 PDF 내부의 이상 위치를 추적하는 기능을 결합하였다.</p>
+                </div>
+            </div>
 
             <h3>(전) 실험 결과 및 한계점</h3>
-
+            
             <p style="margin-top: 12px; font-weight: 600; color: #93c5fd;">실행 결과 및 성과</p>
             <p>저자들은 VAPD가 실제 악성 PDF 탐지 환경에서도 효과적으로 작동하는지 확인하기 위해 여러 데이터셋을 활용하여 실험을 진행하였다. 여기서 실제 지능형 지속 위협 악성 샘플도 포함되었다. 실험 결과 VAPD는 기준 데이터셋에서 <b>99.54%의 정확도</b>를 기록하며 기존 이상 탐지 모델보다 뛰어난 성능을 보였다. 이는 정상 PDF의 구조적 특징을 학습하고 복원 오차를 활용하는 방식이 악성 PDF 탐지에도 효과적으로 적용될 수 있음을 보여준다.</p>
             <p>특히 저자들은 적대적 공격에 대한 강인성을 확인하기 위해 네 가지 공격 기법을 활용하였다. 그 결과 <b>MalGAN 공격에서는 100%의 저항률</b>을 기록하였으며 <b>Adaptive EvadeML 공격에서는 회피율을 6.01%까지 낮추었다</b>. 이를 통해 기존 탐지 모델이 악성 PDF의 작은 변형에도 탐지를 회피당할 수 있었던 문제를 개선할 가능성을 보여주었다.</p>
@@ -621,36 +792,25 @@
                 </div>
             </div>
 
-            <!-- 수정된 한계점 부분 -->
             <div class="callout-box">
                 <b>⚠️ 한계점 및 아쉬운 점</b>
-                <p>높은 탐지 성능과 적대적 강인성을 보여주었지만, VAPD에도 몇 가지 한계점이 존재한다.</p>
+                <p>높은 탐지 성능에도 불구하고 VAPD에는 세 가지 정도의 한계가 존재한다.</p>
+                <div style="margin-top: 12px;">
+                    <b>복잡한 정상 PDF에 대한 오탐 가능성</b>
+                    <p style="margin: 6px 0 14px 0;">정상 PDF 중에서도 구조가 복잡한 파일을 이상 파일로 잘못 판단하는 경우가 발생한다. 저자들은 모델의 성능이 입력 데이터의 특징 표현에 영향을 받기 때문에 이러한 오탐이 발생할 수 있다고 설명하였다.</p>
 
-                <div style="margin-top: 14px;">
-                    <b style="color: #fbbf24;">① 복잡한 정상 PDF에 대한 오탐 가능성</b>
-                    <p style="margin: 6px 0 14px 0;">
-                        정상 PDF 중에서도 구조가 복잡한 파일을 이상 파일로 잘못 판단하는 경우가 발생한다. 저자들은 모델의 성능이 입력 데이터의 특징 표현에 영향을 받기 때문에 이러한 오탐이 발생할 수 있다고 설명하였다.
-                    </p>
+                    <b>이상 위치 식별 성능의 한계</b>
+                    <p style="margin: 6px 0 14px 0;">이상 위치를 식별하는 성능에도 개선할 부분이 남아 있다. VAPD는 전체적인 특징을 기반으로 데이터를 복원하기 때문에 실제 이상이 발생한 위치와 모델이 찾아낸 위치가 정확하게 일치하지 않을 수 있다.</p>
 
-                    <b style="color: #fbbf24;">② 이상 위치 식별의 정확도</b>
-                    <p style="margin: 6px 0 14px 0;">
-                        이상 위치를 식별하는 성능에도 개선할 부분이 남아 있다. VAPD는 전체적인 특징을 기반으로 데이터를 복원하기 때문에 실제 이상이 발생한 위치와 모델이 찾아낸 위치가 정확하게 일치하지 않을 수 있다.
-                    </p>
-
-                    <b style="color: #fbbf24;">③ 난독화 기법에 따른 특징 추출의 어려움</b>
-                    <p style="margin: 6px 0 14px 0;">
-                        인코딩된 키워드와 같은 난독화 기법이 사용되면 PDF의 특징을 추출하는 과정에서 오류가 발생할 수 있다. 이러한 문제는 이상 위치를 정확하게 찾아내는 데에도 영향을 줄 수 있다.
-                    </p>
+                    <b>난독화 기법에 따른 특징 추출의 어려움</b>
+                    <p style="margin: 6px 0 0 0;">인코딩된 키워드와 같은 난독화 기법이 사용되면 PDF의 특징을 추출하는 과정에서 오류가 발생할 수 있다. 이러한 문제는 이상 위치를 정확하게 찾아내는 데에도 영향을 줄 수 있다.</p>
                 </div>
-
-                <p style="margin-top: 10px; font-size: 0.9rem;">
-                    따라서 VAPD는 높은 탐지 성능과 적대적 강인성을 보여주었지만, 복잡한 정상 PDF에 대한 오탐을 줄이고 다양한 난독화 기법에서도 정확하게 이상 위치를 식별할 수 있도록 개선할 필요가 있다.
-                </p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">따라서 VAPD는 높은 탐지 성능과 적대적 강인성을 보여주었지만, 복잡한 정상 PDF에 대한 오탐을 줄이고 다양한 난독화 기법에서도 정확하게 이상 위치를 식별할 수 있도록 개선할 필요가 있다.</p>
             </div>
 
             <h3>(결) 느낀점 및 확장 방향</h3>
             <p><b>느낀점:</b> 이번 VAPD 논문 리뷰를 통해 단순한 시그니처 매칭이나 지도학습 기반 패턴 분류의 한계를 넘어서는 아이디어의 전환을 깊이 깨달았다. 공격자의 변조 패턴을 일일이 쫓아가는 기존 방식에서 벗어나 <b>정상 모델의 복원 실패 오차라는 역발상</b>을 통해 미지의 공격을 방어하고 포렌식적 위치까지 정확히 짚어내는 접근 방식이 매우 신기했다. 특히 보안 분야에서 머신러닝을 적용할 때 데이터의 비대칭성을 어떻게 활용해야 하는지 인사이트를 얻었다.</p>
-
+            
             <div class="callout-box action">
                 <b>🚀 향후 확장 방향 (Action Plan)</b>
                 <ol style="margin: 8px 0 0 0; padding-left: 20px; line-height: 1.6;">
@@ -671,6 +831,7 @@
         </div>
     </div>
 </div>
+
         <!-- ==================== [페이지 3] 활동 회고와 성장 계획 상세 본문 (2번 & 3번 카드스타일 통합) ==================== -->
         <div id="retrospective" class="page">
             <a href="#doc" class="back-btn">← 기술문서 목록으로 돌아가기</a>
