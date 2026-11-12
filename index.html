@@ -390,169 +390,442 @@
         </div>
 
 
+
 <!-- ==================== [페이지 2] VAPD 논문 심층 리뷰 상세 본문 ==================== -->
 <div id="vapd-review" class="page">
     <style>
-        /* VAPD 리뷰 전용 깔끔한 카드 & 그리드 스타일 */
-        .review-section {
-            margin-top: 36px;
+        /* =========================
+           VAPD PAPER REVIEW DESIGN
+        ========================= */
+
+        #vapd-review {
+            --review-blue: #60a5fa;
+            --review-light-blue: #93c5fd;
+            --review-purple: #a78bfa;
+            --review-green: #34d399;
+            --review-orange: #fbbf24;
+            --review-text: #e2e8f0;
+            --review-muted: #a1afc2;
+            --review-border: rgba(148, 163, 184, 0.15);
+            --review-card: rgba(30, 41, 59, 0.55);
+            color: var(--review-text);
         }
-        .review-section h2 {
-            font-size: 1.4rem;
-            border-bottom: 2px solid var(--accent-blue, #3b82f6);
-            padding-bottom: 8px;
-            margin-bottom: 20px;
+
+        #vapd-review .post-content {
+            line-height: 1.85;
+            letter-spacing: -0.015em;
+        }
+
+        #vapd-review .page-header {
+            padding: 28px 0 30px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--review-border);
+        }
+
+        #vapd-review .page-header h1 {
+            font-size: clamp(1.5rem, 3vw, 2.1rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.5;
+        }
+
+        #vapd-review .subtag {
+            display: inline-block;
+            padding: 5px 11px;
+            margin: 3px 4px 3px 0;
+            border: 1px solid rgba(96, 165, 250, 0.25);
+            border-radius: 20px;
+            background: rgba(59, 130, 246, 0.10);
+            color: #93c5fd;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        #vapd-review .back-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 9px 15px;
+            border: 1px solid var(--review-border);
+            border-radius: 9px;
+            color: var(--review-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: 0.2s;
+        }
+
+        #vapd-review .back-btn:hover {
+            color: white;
+            border-color: var(--review-blue);
+            background: rgba(59, 130, 246, 0.10);
+        }
+
+        /* 메타데이터 카드 */
+        #vapd-review .paper-meta-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(
+                135deg,
+                rgba(30, 64, 175, 0.17),
+                rgba(30, 41, 59, 0.65)
+            );
+            border: 1px solid rgba(96, 165, 250, 0.25);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 38px;
+            line-height: 1.85;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        #vapd-review .paper-meta-card > div:first-child {
+            font-size: 1.1rem !important;
+            letter-spacing: -0.02em;
+        }
+
+        #vapd-review .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 18px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--review-border);
+        }
+
+        #vapd-review .meta-item {
+            padding: 13px 15px;
+            background: rgba(15, 23, 42, 0.35);
+            border: 1px solid rgba(148, 163, 184, 0.10);
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        #vapd-review .meta-label {
+            color: var(--review-muted);
+            font-size: 0.77rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin-bottom: 5px;
+        }
+
+        /* 섹션 제목 */
+        #vapd-review .review-section {
+            margin-top: 48px;
+        }
+
+        #vapd-review .review-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -0.035em;
+            padding: 0 0 15px 0;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--review-border);
+        }
+
+        #vapd-review .review-section h2::before {
+            content: "";
+            display: block;
+            width: 5px;
+            height: 25px;
+            border-radius: 5px;
+            background: linear-gradient(180deg, #60a5fa, #818cf8);
+            flex-shrink: 0;
+        }
+
+        #vapd-review .review-section h3 {
+            font-size: 1.12rem;
+            font-weight: 750;
+            color: var(--review-light-blue);
+            margin: 36px 0 18px;
+            padding: 11px 15px;
+            border-left: 4px solid var(--review-blue);
+            border-radius: 0 8px 8px 0;
+            background: linear-gradient(
+                90deg,
+                rgba(59, 130, 246, 0.12),
+                transparent
+            );
+        }
+
+        #vapd-review .review-section p {
+            color: var(--review-text);
+            line-height: 1.9;
+            margin-bottom: 13px;
+        }
+
+        #vapd-review .review-section p b {
+            color: #f1f5f9;
+        }
+
+        #vapd-review .review-section ul,
+        #vapd-review .review-section ol {
+            padding-left: 23px;
+        }
+
+        #vapd-review .review-section li {
+            padding-left: 3px;
+            margin-bottom: 7px;
+            line-height: 1.8;
+        }
+
+        #vapd-review .review-section li::marker {
+            color: var(--review-blue);
+            font-weight: 700;
+        }
+
+        /* 개념 카드 */
+        #vapd-review .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 18px;
+        }
+
+        #vapd-review .concept-card {
+            position: relative;
+            background: var(--review-card);
+            border: 1px solid var(--review-border);
+            border-radius: 13px;
+            padding: 19px 20px;
+            transition: transform 0.22s ease, border-color 0.22s ease,
+                        background 0.22s ease;
+        }
+
+        #vapd-review .concept-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(96, 165, 250, 0.45);
+            background: rgba(37, 52, 75, 0.75);
+        }
+
+        #vapd-review .concept-title {
+            font-weight: 800;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: #bfdbfe;
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        .review-section h3 {
-            font-size: 1.15rem;
-            color: var(--accent-blue, #60a5fa);
-            margin: 24px 0 12px 0;
-            padding-left: 10px;
-            border-left: 4px solid var(--accent-blue, #3b82f6);
+
+        #vapd-review .concept-card p,
+        #vapd-review .concept-card ul {
+            font-size: 0.89rem;
+            color: #cbd5e1;
+            margin-bottom: 0;
+            line-height: 1.8;
         }
-        /* 메타데이터 요약 카드 */
-        .paper-meta-card {
-            background: rgba(59, 130, 246, 0.06);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            border-radius: 12px;
-            padding: 20px 24px;
-            margin-bottom: 28px;
-            line-height: 1.7;
+
+        #vapd-review .concept-card ul {
+            padding-left: 19px;
+            margin-top: 8px;
         }
-        .meta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px;
-            margin-bottom: 16px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        #vapd-review .concept-card li {
+            margin-bottom: 4px;
         }
-        .meta-item {
-            font-size: 0.92rem;
-        }
-        .meta-label {
-            color: var(--text-secondary, #9ca3af);
-            font-size: 0.8rem;
-            display: block;
-            margin-bottom: 2px;
-        }
-        /* 개념 카드 그리드 */
-        .concept-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-            margin-top: 16px;
-        }
-        .concept-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+
+        /* 흐름도 */
+        #vapd-review .flow-diagram {
+            background: rgba(16, 185, 129, 0.07);
+            border: 1px dashed rgba(52, 211, 153, 0.4);
             border-radius: 10px;
-            padding: 16px 18px;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-        .concept-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(59, 130, 246, 0.4);
-        }
-        .concept-title {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 8px;
-            color: #e5e7eb;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .concept-card p, .concept-card ul {
-            font-size: 0.9rem;
-            color: var(--text-secondary, #d1d5db);
-            margin: 0;
-            line-height: 1.6;
-        }
-        .concept-card ul {
-            padding-left: 18px;
-            margin-top: 6px;
-        }
-        /* 흐름도 박스 */
-        .flow-diagram {
-            background: rgba(16, 185, 129, 0.06);
-            border: 1px dashed rgba(16, 185, 129, 0.4);
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin: 12px 0;
+            padding: 16px;
+            margin: 15px 0;
             font-size: 0.88rem;
             text-align: center;
             color: #a7f3d0;
-            font-weight: 500;
+            font-weight: 600;
+            line-height: 2;
         }
+
         /* 비교 테이블 */
-        .styled-table {
+        #vapd-review .styled-table {
             width: 100%;
-            border-collapse: collapse;
-            margin: 16px 0;
-            font-size: 0.9rem;
-            border-radius: 8px;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            font-size: 0.87rem;
+            border: 1px solid var(--review-border);
+            border-radius: 12px;
             overflow: hidden;
         }
-        .styled-table th {
-            background: rgba(59, 130, 246, 0.15);
-            color: #93c5fd;
+
+        #vapd-review .styled-table th {
+            background: rgba(59, 130, 246, 0.16);
+            color: #bfdbfe;
             text-align: left;
-            padding: 12px 14px;
-            font-weight: 600;
+            padding: 14px;
+            font-weight: 750;
+            border-bottom: 1px solid rgba(96, 165, 250, 0.2);
         }
-        .styled-table td {
-            padding: 12px 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            line-height: 1.5;
+
+        #vapd-review .styled-table td {
+            padding: 14px;
+            border-bottom: 1px solid var(--review-border);
+            line-height: 1.7;
+            color: #cbd5e1;
+            vertical-align: top;
         }
-        .styled-table tr:nth-child(even) {
-            background: rgba(255, 255, 255, 0.02);
+
+        #vapd-review .styled-table tr:last-child td {
+            border-bottom: none;
         }
-        /* 성과 하이라이트 배지 */
-        .stat-grid {
+
+        #vapd-review .styled-table tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        #vapd-review .styled-table td b {
+            color: #93c5fd;
+        }
+
+        /* 실험 결과 카드 */
+        #vapd-review .stat-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
-            margin: 16px 0;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 13px;
+            margin: 23px 0;
         }
-        .stat-box {
-            background: linear-gradient(145deg, rgba(59, 130, 246, 0.12), rgba(16, 185, 129, 0.08));
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 10px;
-            padding: 16px;
+
+        #vapd-review .stat-box {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(
+                145deg,
+                rgba(30, 64, 175, 0.18),
+                rgba(30, 41, 59, 0.75)
+            );
+            border: 1px solid rgba(96, 165, 250, 0.25);
+            border-radius: 13px;
+            padding: 21px 13px;
             text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
         }
-        .stat-num {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #60a5fa;
+
+        #vapd-review .stat-box:hover {
+            transform: translateY(-3px);
+            border-color: rgba(96, 165, 250, 0.65);
+        }
+
+        #vapd-review .stat-num {
+            font-size: 1.45rem;
+            font-weight: 850;
+            color: #93c5fd;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
+            letter-spacing: -0.04em;
         }
-        .stat-desc {
-            font-size: 0.82rem;
-            color: var(--text-secondary, #d1d5db);
+
+        #vapd-review .stat-desc {
+            font-size: 0.81rem;
+            color: #b6c4d5;
+            line-height: 1.6;
         }
-        /* 한계점 & Action Plan 박스 */
-        .callout-box {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 4px solid #f59e0b;
-            border-radius: 0 8px 8px 0;
-            padding: 16px 20px;
-            margin: 16px 0;
-            line-height: 1.65;
+
+        /* 강조 박스 */
+        #vapd-review .callout-box {
+            background: rgba(245, 158, 11, 0.055);
+            border: 1px solid rgba(245, 158, 11, 0.16);
+            border-left: 4px solid #fbbf24;
+            border-radius: 10px;
+            padding: 21px 23px;
+            margin: 22px 0;
+            line-height: 1.85;
         }
-        .callout-box.action {
-            border-left-color: #10b981;
-            background: rgba(16, 185, 129, 0.05);
+
+        #vapd-review .callout-box > b {
+            display: inline-block;
+            color: #fcd34d;
+            font-size: 1rem;
+            margin-bottom: 8px;
         }
-        .callout-box.paper {
-            border-left-color: #8b5cf6;
-            background: rgba(139, 92, 246, 0.05);
+
+        #vapd-review .callout-box.action {
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            border-left: 4px solid #34d399;
+            background: rgba(16, 185, 129, 0.055);
+        }
+
+        #vapd-review .callout-box.action > b {
+            color: #6ee7b7;
+        }
+
+        #vapd-review .callout-box.paper {
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            border-left: 4px solid #a78bfa;
+            background: rgba(139, 92, 246, 0.055);
+        }
+
+        #vapd-review .callout-box.paper > b {
+            color: #c4b5fd;
+        }
+
+        /* 핵심 문제 박스 */
+        #vapd-review .callout-box[style*="border-left-color: #3b82f6"] {
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            border-left: 4px solid #60a5fa !important;
+            border-radius: 10px;
+            background: rgba(59, 130, 246, 0.07) !important;
+        }
+
+        #vapd-review .callout-box[style*="border-left-color: #3b82f6"] > b {
+            color: #93c5fd;
+        }
+
+        /* 한계점 개별 카드 */
+        #vapd-review .limitation-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 17px;
+        }
+
+        #vapd-review .limitation-item {
+            padding: 15px 17px;
+            background: rgba(15, 23, 42, 0.48);
+            border: 1px solid rgba(245, 158, 11, 0.16);
+            border-radius: 9px;
+        }
+
+        #vapd-review .limitation-item b {
+            display: block;
+            color: #fcd34d;
+            font-size: 0.94rem;
+            margin-bottom: 5px;
+        }
+
+        #vapd-review .limitation-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        /* 반응형 */
+        @media (max-width: 650px) {
+            #vapd-review .paper-meta-card {
+                padding: 17px;
+            }
+
+            #vapd-review .review-section h2 {
+                font-size: 1.15rem;
+            }
+
+            #vapd-review .concept-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #vapd-review .styled-table {
+                font-size: 0.78rem;
+            }
+
+            #vapd-review .styled-table th,
+            #vapd-review .styled-table td {
+                padding: 9px;
+            }
+
+            #vapd-review .callout-box {
+                padding: 16px;
+            }
         }
     </style>
 
@@ -792,20 +1065,29 @@
                 </div>
             </div>
 
+            <!-- 한계점 디자인 개선 -->
             <div class="callout-box">
                 <b>⚠️ 한계점 및 아쉬운 점</b>
                 <p>높은 탐지 성능에도 불구하고 VAPD에는 세 가지 정도의 한계가 존재한다.</p>
-                <div style="margin-top: 12px;">
-                    <b>복잡한 정상 PDF에 대한 오탐 가능성</b>
-                    <p style="margin: 6px 0 14px 0;">정상 PDF 중에서도 구조가 복잡한 파일을 이상 파일로 잘못 판단하는 경우가 발생한다. 저자들은 모델의 성능이 입력 데이터의 특징 표현에 영향을 받기 때문에 이러한 오탐이 발생할 수 있다고 설명하였다.</p>
 
-                    <b>이상 위치 식별 성능의 한계</b>
-                    <p style="margin: 6px 0 14px 0;">이상 위치를 식별하는 성능에도 개선할 부분이 남아 있다. VAPD는 전체적인 특징을 기반으로 데이터를 복원하기 때문에 실제 이상이 발생한 위치와 모델이 찾아낸 위치가 정확하게 일치하지 않을 수 있다.</p>
+                <div class="limitation-list">
+                    <div class="limitation-item">
+                        <b>01. 복잡한 정상 PDF에 대한 오탐 가능성</b>
+                        <p>정상 PDF 중에서도 구조가 복잡한 파일을 이상 파일로 잘못 판단하는 경우가 발생한다. 저자들은 모델의 성능이 입력 데이터의 특징 표현에 영향을 받기 때문에 이러한 오탐이 발생할 수 있다고 설명하였다.</p>
+                    </div>
 
-                    <b>난독화 기법에 따른 특징 추출의 어려움</b>
-                    <p style="margin: 6px 0 0 0;">인코딩된 키워드와 같은 난독화 기법이 사용되면 PDF의 특징을 추출하는 과정에서 오류가 발생할 수 있다. 이러한 문제는 이상 위치를 정확하게 찾아내는 데에도 영향을 줄 수 있다.</p>
+                    <div class="limitation-item">
+                        <b>02. 이상 위치 식별 성능의 한계</b>
+                        <p>이상 위치를 식별하는 성능에도 개선할 부분이 남아 있다. VAPD는 전체적인 특징을 기반으로 데이터를 복원하기 때문에 실제 이상이 발생한 위치와 모델이 찾아낸 위치가 정확하게 일치하지 않을 수 있다.</p>
+                    </div>
+
+                    <div class="limitation-item">
+                        <b>03. 난독화 기법에 따른 특징 추출의 어려움</b>
+                        <p>인코딩된 키워드와 같은 난독화 기법이 사용되면 PDF의 특징을 추출하는 과정에서 오류가 발생할 수 있다. 이러한 문제는 이상 위치를 정확하게 찾아내는 데에도 영향을 줄 수 있다.</p>
+                    </div>
                 </div>
-                <p style="margin-top: 10px; font-size: 0.9rem;">따라서 VAPD는 높은 탐지 성능과 적대적 강인성을 보여주었지만, 복잡한 정상 PDF에 대한 오탐을 줄이고 다양한 난독화 기법에서도 정확하게 이상 위치를 식별할 수 있도록 개선할 필요가 있다.</p>
+
+                <p style="margin-top: 15px; font-size: 0.9rem;">따라서 VAPD는 높은 탐지 성능과 적대적 강인성을 보여주었지만, 복잡한 정상 PDF에 대한 오탐을 줄이고 다양한 난독화 기법에서도 정확하게 이상 위치를 식별할 수 있도록 개선할 필요가 있다.</p>
             </div>
 
             <h3>(결) 느낀점 및 확장 방향</h3>
