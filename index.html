@@ -391,6 +391,7 @@
 
 
 
+
 <!-- ==================== [페이지 2] VAPD 논문 심층 리뷰 상세 본문 ==================== -->
 <div id="vapd-review" class="page">
     <style>
@@ -800,6 +801,61 @@
             color: #cbd5e1;
         }
 
+        /* =========================
+           (승) 세로형 설명 레이아웃
+        ========================= */
+
+        #vapd-review .approach-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-top: 19px;
+            border-top: 1px solid rgba(96, 165, 250, 0.18);
+        }
+
+        #vapd-review .approach-item {
+            display: grid;
+            grid-template-columns: 42px minmax(0, 1fr);
+            gap: 15px;
+            padding: 20px 8px;
+            border-bottom: 1px solid var(--review-border);
+            transition: background 0.2s ease;
+        }
+
+        #vapd-review .approach-item:hover {
+            background: rgba(59, 130, 246, 0.045);
+        }
+
+        #vapd-review .approach-number {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 2px;
+            color: #60a5fa;
+            font-size: 0.88rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+        }
+
+        #vapd-review .approach-content {
+            min-width: 0;
+        }
+
+        #vapd-review .approach-title {
+            color: #bfdbfe;
+            font-size: 1rem;
+            font-weight: 800;
+            line-height: 1.55;
+            margin-bottom: 8px;
+        }
+
+        #vapd-review .approach-content p {
+            color: #cbd5e1;
+            font-size: 0.91rem;
+            line-height: 1.85;
+            margin: 0;
+        }
+
         /* 반응형 */
         @media (max-width: 650px) {
             #vapd-review .paper-meta-card {
@@ -825,6 +881,20 @@
 
             #vapd-review .callout-box {
                 padding: 16px;
+            }
+
+            #vapd-review .approach-item {
+                grid-template-columns: 32px minmax(0, 1fr);
+                gap: 10px;
+                padding: 17px 3px;
+            }
+
+            #vapd-review .approach-title {
+                font-size: 0.95rem;
+            }
+
+            #vapd-review .approach-content p {
+                font-size: 0.88rem;
             }
         }
     </style>
@@ -1023,18 +1093,30 @@
             <h3>(승) 핵심 아이디어 및 방법론</h3>
             <p><b>저자들의 핵심 아이디어 및 접근 방향:</b> 기본 악성 PDF 탐지 기술이 악성 여부만 구분하고 구체적인 이상 위치를 알려주지 못한다는 점에 주목했다. 또한 적대적 공격에 대응하기 위해 악성 샘플을 추가로 학습시키는 방식은 높은 계산 비용과 오탐률 증가 등의 문제가 있다고 보았다. 그래서 저자들은 악성 PDF를 직접 학습시키기보다 <b>정상 PDF의 구조적 특징을 먼저 학습하고 정상적인 패턴에서 벗어나는 파일을 이상으로 판단하는 방식</b>을 제안하였고, 특히 입력 데이터와 복원 데이터의 차이를 활용하면 악성 여부뿐만 아니라 이상이 발생한 위치까지 파악할 수 있다고 판단하였다. 이러한 바탕으로 <b>VAPD(VAE-based Anomaly detection for PDF malware Detection)</b> 모델을 설계하였다. VAPD의 핵심 목표는 악성 PDF 탐지와 내부 이상 위치 식별이라는 두 가지 포렌식 기능을 함께 제공하는 것이다.</p>
             
-            <div class="concept-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 16px;">
-                <div class="concept-card">
-                    <div class="concept-title">1️⃣ PDF의 구조를 분석하는 방법</div>
-                    <p>VAPD가 PDF의 이상 여부를 판단하려면 먼저 파일 내부의 구조를 이해해야 한다. 이를 위해 PDF 내부의 객체와 연결 관계를 분석하여 구조 트리를 만들고, 객체들이 연결된 경로를 추출한다. 이후 이러한 경로를 숫자로 표현한 특징 벡터로 변환하여 모델이 학습할 수 있도록 한다. 이때 저자들은 기존 연구의 구조적 경로 추출 방식을 활용하면서도 경로와 실제 PDF 객체를 연결하는 <b>Path-Object Mapping Table</b>을 추가하였다. 이는 단순히 이상이 있다는 사실을 알려주는 것을 넘어, 어떤 객체에서 이상이 발생했는지 찾아내기 위한 것이다.</p>
+            <!-- 승 부분: 긴 카드 대신 세로형 설명 행 -->
+            <div class="approach-list">
+                <div class="approach-item">
+                    <div class="approach-number">01</div>
+                    <div class="approach-content">
+                        <div class="approach-title">PDF의 구조를 분석하는 방법</div>
+                        <p>VAPD가 PDF의 이상 여부를 판단하려면 먼저 파일 내부의 구조를 이해해야 한다. 이를 위해 PDF 내부의 객체와 연결 관계를 분석하여 구조 트리를 만들고, 객체들이 연결된 경로를 추출한다. 이후 이러한 경로를 숫자로 표현한 특징 벡터로 변환하여 모델이 학습할 수 있도록 한다. 이때 저자들은 기존 연구의 구조적 경로 추출 방식을 활용하면서도 경로와 실제 PDF 객체를 연결하는 <b>Path-Object Mapping Table</b>을 추가하였다. 이는 단순히 이상이 있다는 사실을 알려주는 것을 넘어, 어떤 객체에서 이상이 발생했는지 찾아내기 위한 것이다.</p>
+                    </div>
                 </div>
-                <div class="concept-card">
-                    <div class="concept-title">2️⃣ 정상 데이터 학습과 이상 탐지</div>
-                    <p>저자들은 VAE를 활용하여 정상 PDF의 특징을 학습하도록 모델을 구성하였다. VAE는 입력 데이터를 압축한 뒤 다시 복원하는 구조로, 정상 데이터의 특징을 학습하고 이를 재구성하는 데 사용된다. 또한 저자들은 Latent Component를 결합하여 이상 탐지 성능을 보완하였다. 최종적으로 원본과 복원된 데이터의 차이 및 잠재 공간의 분석 결과를 활용해 파일의 이상 여부를 판단한다. 이러한 방식의 중요한 점은 다양한 악성 PDF를 미리 학습 데이터에 포함하지 않아도 된다는 것이다. 저자들은 악성 샘플을 생성하고 추가 학습하는 기존 적대적 학습 방식의 높은 비용을 줄이면서도 탐지 모델의 강인성을 확보하고자 하였다.</p>
+
+                <div class="approach-item">
+                    <div class="approach-number">02</div>
+                    <div class="approach-content">
+                        <div class="approach-title">정상 데이터 학습과 이상 탐지</div>
+                        <p>저자들은 VAE를 활용하여 정상 PDF의 특징을 학습하도록 모델을 구성하였다. VAE는 입력 데이터를 압축한 뒤 다시 복원하는 구조로, 정상 데이터의 특징을 학습하고 이를 재구성하는 데 사용된다. 또한 저자들은 Latent Component를 결합하여 이상 탐지 성능을 보완하였다. 최종적으로 원본과 복원된 데이터의 차이 및 잠재 공간의 분석 결과를 활용해 파일의 이상 여부를 판단한다. 이러한 방식의 중요한 점은 다양한 악성 PDF를 미리 학습 데이터에 포함하지 않아도 된다는 것이다. 저자들은 악성 샘플을 생성하고 추가 학습하는 기존 적대적 학습 방식의 높은 비용을 줄이면서도 탐지 모델의 강인성을 확보하고자 하였다.</p>
+                    </div>
                 </div>
-                <div class="concept-card">
-                    <div class="concept-title">3️⃣ 탐지를 넘어 이상 위치까지 찾아내는 방법</div>
-                    <p>저자들이 특히 중요하게 생각한 부분은 악성 여부를 판단하는 것에서 분석을 끝내지 않는다는 점이다. 기존 모델은 파일이 악성이라고 알려주더라도 분석가가 내부의 어떤 부분이 문제인지 다시 조사해야 했다. 이를 보완하기 위해 VAPD는 재구성 과정에서 큰 차이가 나타난 구조적 경로를 확인하고, Path-Object Mapping Table을 이용해 해당 경로와 연결된 객체를 찾아낸다. 한마디로, VAPD는 악성 PDF를 탐지하는 동시에 의심스러운 객체의 위치까지 제공하여 분석가가 문제의 원인을 더 빠르게 파악할 수 있도록 설계되었다. 결과적으로 저자들은 정상 데이터만을 활용한 학습 방식과 PDF 내부의 이상 위치를 추적하는 기능을 결합하였다.</p>
+
+                <div class="approach-item">
+                    <div class="approach-number">03</div>
+                    <div class="approach-content">
+                        <div class="approach-title">탐지를 넘어 이상 위치까지 찾아내는 방법</div>
+                        <p>저자들이 특히 중요하게 생각한 부분은 악성 여부를 판단하는 것에서 분석을 끝내지 않는다는 점이다. 기존 모델은 파일이 악성이라고 알려주더라도 분석가가 내부의 어떤 부분이 문제인지 다시 조사해야 했다. 이를 보완하기 위해 VAPD는 재구성 과정에서 큰 차이가 나타난 구조적 경로를 확인하고, Path-Object Mapping Table을 이용해 해당 경로와 연결된 객체를 찾아낸다. 한마디로, VAPD는 악성 PDF를 탐지하는 동시에 의심스러운 객체의 위치까지 제공하여 분석가가 문제의 원인을 더 빠르게 파악할 수 있도록 설계되었다. 결과적으로 저자들은 정상 데이터만을 활용한 학습 방식과 PDF 내부의 이상 위치를 추적하는 기능을 결합하였다.</p>
+                    </div>
                 </div>
             </div>
 
@@ -1114,174 +1196,6 @@
     </div>
 </div>
 
-        <!-- ==================== [페이지 3] 활동 회고와 성장 계획 상세 본문 (2번 & 3번 카드스타일 통합) ==================== -->
-        <div id="retrospective" class="page">
-            <a href="#doc" class="back-btn">← 기술문서 목록으로 돌아가기</a>
-            <div class="page-header">
-                <span class="subtag">활동 회고</span>
-                <span class="subtag">성장 계획</span>
-                <h1 style="margin-top:10px;">🛡️ 정보보안 입문자로서의 지난 활동 회고와 앞으로의 성장 계획</h1>
-                <p style="color: var(--text-secondary); margin: 6px 0 0 0;">🗓️ 2026.11.08 | 작성자: 김민경 (상명대 CodeCure)</p>
-            </div>
-            
-            <div class="post-content">
-                <h2>1. 🌱 보안의 첫 시작 이후</h2>
-                <p>
-                    정보보안공학과 1학년으로 대학 생활을 딱 시작했을 때 나에게 보안이라는 분야는 정말 거대하고 멋있었지만 솔직히 한편으로는 어떻게 접근을 해야 하고 어떻게 시작해야 하는지 막막했다. 그리고 영화나 드라마에서 보던 해커나 포렌식 수사하는 모습만 떠올리며 호기심도 있었지만 두려움도 있었다.
-                </p>
-                <p>
-                    보안을 시작하고 몇 개월 동안 학부 수업을 들으며 C언어, 파이썬, 자바 같은 기초 프로그래밍 언어를 체계적으로 익히고 동아리 활동을 통해 다채로운 보안 개념들과 기초적인 문제들을 접해 볼 수 있었다. 비록 이제 막 입문해서 기초 체력을 다지고 있는 1학년이지만 학부 수업이랑 동아리에서 배운 코딩과 이론들이 실제 시스템 취약점이나 공격 분석 그리고 포렌식 추적에 어떻게 연결되는지 조금씩 알게 되었다.
-                </p>
-
-                <h2>2. 🔍 내가 마주한 한계와 부족한 점</h2>
-                <p>
-                    동아리의 심화 과제나 보안 4대 탑 컨퍼런스 논문을 리뷰하고 분석하면서 진짜 아는 게 하나도 없구나하는 것을 느꼈다. 거기에서 명확한 한계와 부족함을 느꼈다. 1학년으로서 마주한 부족한 점이 정말 많지만 그중 3개가 밑에 있는 것이다.
-                </p>
-                
-                <div class="info-box">
-                    <h3>1) 프로그래밍 언어와 보안 개념 간의 연결 고리 부족</h3>
-                    <p>
-                        첫째, 프로그래밍 언어와 보안 개념 간의 연결 고리가 부족하다고 생각한다. 학교에서 배운 C언어나 파이썬, 자바 코딩과 보안 이론을 각각 별개의 과목으로만 공부하다 보니 둘을 하나로 엮는 응용 능력이 많이 부족하다고 느꼈다. 예를 들어 C언어로 열심히 작성한 코드에서 메모리 구조상 버퍼 오버플로우 같은 취약점이 정확히 어떤 원리로 터지는지 혹은 파이썬 파싱 라이브러리가 실제 악성 파일 탐지 도구나 포렌식 분석기에 어떻게 이식되어 작동하는지 실전 코드로 직접 연결하려고 했을 때 어떻게 해야 하는지 모르겠다고 생각 한 적이 많았다.
-                    </p>
-
-                    <h3>2) 실전 데이터 분석 경험 및 역추적 역량의 부족</h3>
-                    <p>
-                        둘째, 실전 데이터 분석 경험 및 역추적 역량이 부족하다고 생각한다. 이제 막 1학년 과정을 지나고 있다 보니 이론이나 단순한 기초 예제 코딩은 맛보았지만, 실제 악성 문서 파일을 구조적으로 파헤치거나 디지털 포렌식 관점에서 데이터의 흐름과 시스템에 남은 흔적을 세밀하게 역추적해 보는 실전 경험이 턱없이 모자랐다. 논문을 읽으면서도 이 복잡한 구조를 내가 직접 포렌식 도구로 분석할 수 있을까?라는 생각도 들었다.
-                    </p>
-
-                    <h3>3) 수동적인 문제 해결 습관과 주체적 탐구심 부족</h3>
-                    <p>
-                        셋째, 수동적인 문제 해결 습관과 주체적 탐구심이 부족하다고 생각한다. 과제나 문제를 풀 때 에러나 실패했을 때 왜 이 에러가 났을까를 깊이 파고들기보다는 당장 답을 내고 싶어서 또는 과제를 빠르게 하고 싶어서 선배분들한테 물어보거나 AI를 곧바로 의존해버리는 수동적인 태도가 있었다.
-                    </p>
-                </div>
-
-                <h2>3. 🚀 부족한 점을 채워나갈 앞으로의 계획</h2>
-                
-                <div class="info-box">
-                    <h3>1) 전공 코딩과 보안 이론을 잇는 미니 프로젝트 도전</h3>
-                    <p>
-                        첫째, 전공 코딩과 보안 이론을 잇는 미니 프로젝트를 도전해 볼 것이다. 학교에서 배우는 C언어, 파이썬, 자바 전공 지식과 보안 이론이 따로 노는 것을 막기 위해 직접 코드로 구현해보는 미니 프로젝트를 실습하겠다. 최근 리뷰했던 USENIX Security의 VAPD 논문에서 얻은 아이디어를 바탕으로, Python 파싱 라이브러리와 간이 오토인코더 구조를 활용해 미니 PDF 악성 구조 탐지 및 복원 오차 측정 도구를 내 손으로 직접 코딩해보며 프로그래밍 언어가 보안 분석에 이식되는 과정을 해 볼 것이다.
-                    </p>
-
-                    <h3>2) 수동적인 의존 탈피 및 역추적 디버깅 경험 확대</h3>
-                    <p>
-                        둘째, 수동적인 의존을 버리고 역추적 디버깅을 해보는 경험을 늘려볼 것이다. 그동안 과제나 문제를 풀 때 에러나 실패를 많이 했는데 그때마다 답을 빨리 내고 싶어서 선배님들께 물어보거나 AI에 곧바로 의존하던 수동적인 태도보다는 시스템 로그와 메모리 상태, 코드의 실행 흐름을 세밀하게 역추적하는 디버깅 습관을 들여서 왜 이 에러가 났을까를 내 힘으로 끝까지 파헤치는 주체적인 탐구 체력을 기를 것이다.
-                    </p>
-
-                    <h3>3) 나이츠 프론티어와 동아리 스터디를 통한 실전 데이터 분석</h3>
-                    <p>
-                        셋째, 나이츠 프론티어와 동아리 스터디를 통한 실전 데이터 분석 경험을 쌓을 것이다. 이론과 기초 코딩에만 머물지 않고 실제 악성 문서 파일 구조나 디지털 포렌식 관점의 데이터 흐름을 분석하는 실전 경험을 넓힐 것이다. 혼자서 해결하기 어려운 내용들은 동아리 동료들과 함께 스터디를 만들어서 서로 토론을 하고 나이츠 프론티어에서 주어지는 과제들을 포기하지 않고 끝까지 완수해 내며 실전 감각과 분석 역량을 기를 것이다.
-                    </p>
-                </div>
-
-                <h2>4. 🌟 마치며</h2>
-                <p>
-                    이번 회고를 작성하면서 보안 입문자로서 현재 내가 서 있는 출발점과 앞으로 채워나가야 할 점이 무엇인지 명확하게 알 수 있었다. 정보보안이라는 거대하고 깊이 있는 학문 앞에서 막막함과 한계에 부딪히기도 했지만, 내 부족함을 솔직하게 인정하고 나아갈 올바른 방향을 다잡는 소중한 계기가 되었다.
-                </p>
-                <p>
-                    시작부터 완벽한 사람은 없다고 생각한다. 그렇기에 앞으로 나이츠 프론티어 과제와 동아리 스터디를 진행하며 마주할 수많은 실패와 디버깅 에러 역시 나를 한층 더 단단하게 만들어 줄 경험이라고 믿는다. 매일 배운 지식과 문제를 해결해 낸 과정을 깃허브 블로그에 꾸준히 기록하며 지식의 깊이를 다지고, 스스로 질문하며 끝까지 파고드는 주체적인 학습 루틴을 꼭 완성할 것이다.
-                </p>
-                <p>
-                    훗날 디지털 포렌식 및 침해사고 대응 분야에서 복잡한 원인을 정확히 규명하고 사회에 기여할 수 있는 전문성과 책임감을 갖춘 보안 전문가로 성장하기 위해 멈추지 않고 꾸준히 나아갈 것이다.
-                </p>
-            </div>
-        </div>
-
-        <!-- ==================== [카테고리 상세 목록들] ==================== -->
-        <div id="dev" class="page">
-            <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-            <div class="page-header">
-                <h1>💻 개발 (Development)</h1>
-                <p style="color: var(--text-secondary); margin: 6px 0 0 0;">C, Python, Java 기반 프로그래밍 및 알고리즘 학습 기록 공간입니다.</p>
-            </div>
-            <div class="post-list">
-                <div class="empty-notice">📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!</div>
-            </div>
-        </div>
-
-        <div id="ctf" class="page">
-            <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-            <div class="page-header">
-                <h1>🛡️ CTF / Wargame</h1>
-                <p style="color: var(--text-secondary); margin: 6px 0 0 0;">시스템/웹 워게임 문제 분석 및 Write-up 정리 공간입니다.</p>
-            </div>
-            <div class="post-list">
-                <div class="empty-notice">📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!</div>
-            </div>
-        </div>
-
-        <div id="bug" class="page">
-            <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-            <div class="page-header">
-                <h1>🔍 Bug Bounty</h1>
-                <p style="color: var(--text-secondary); margin: 6px 0 0 0;">웹/시스템 취약점 탐색 및 취약점 분석 리포트 공간입니다.</p>
-            </div>
-            <div class="post-list">
-                <div class="empty-notice">📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!</div>
-            </div>
-        </div>
-
-        <!-- 4. 블로그 / 기술문서 목록 -->
-        <div id="doc" class="page">
-            <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-            <div class="page-header">
-                <h1>📝 블로그 / 기술문서 (DFIR & DF)</h1>
-                <p style="color: var(--text-secondary); margin: 6px 0 0 0;">디지털 포렌식, DFIR, 네트워크 및 OS 제반 기술 정리 문서 공간입니다.</p>
-            </div>
-            <div class="post-list">
-                <!-- 회고록 게시글 카드 -->
-                <a href="#retrospective" class="post-card">
-                    <div class="post-meta">
-                        <span>🗓️ 2026.11.08</span>
-                    </div>
-                    <div class="post-title">🛡️ 정보보안 입문자로서의 지난 활동 회고와 앞으로의 성장 계획</div>
-                    <div class="post-desc">보안을 시작하며 느낀 한계점과 부족함을 극복하기 위한 구체적인 3가지 액션 플랜 정리</div>
-                    <div class="post-subtags">
-                        <span class="subtag">#활동회고</span>
-                        <span class="subtag">#성장계획</span>
-                        <span class="subtag">#KnightsFrontier</span>
-                        <span class="subtag">#CodeCure</span>
-                    </div>
-                </a>
-
-                <!-- 기존 미션 #4 게시글 카드 -->
-                <a href="#mission4" class="post-card">
-                    <div class="post-meta">
-                        <span>🗓️ 2026.11.07</span>
-                    </div>
-                    <div class="post-title">📝 미션 #4 - [필수미션] '나'에 대해 기록하기</div>
-                    <div class="post-desc">나의 진로 가치관과 나이츠 프론티어 지원 동기 및 7개월 목표 정리</div>
-                    <div class="post-subtags">
-                        <span class="subtag">#KnightsFrontier</span>
-                        <span class="subtag">#SelfReflection</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- 5. 논문 / 컨퍼런스 목록 -->
-        <div id="conf" class="page">
-            <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
-            <div class="page-header">
-                <h1>🎓 논문 / 컨퍼런스</h1>
-                <p style="color: var(--text-secondary); margin: 6px 0 0 0;">보안 학술 논문 리뷰 및 보안 컨퍼런스/세미나 참관 기록 공간입니다.</p>
-            </div>
-            <div class="post-list">
-                <a href="#vapd-review" class="post-card">
-                    <div class="post-meta">
-                        <span>🗓️ 2026.11.07</span>
-                        <span>🏛️ USENIX Security '25</span>
-                    </div>
-                    <div class="post-title">🎓 [심층 리뷰] VAPD: An Anomaly Detection Model for PDF Malware Forensics</div>
-                    <div class="post-desc">USENIX Security 채택 논문 심층 리뷰 - 정상 학습 기반 복원 오차를 이용한 PDF 악성코드 포렌식</div>
-                    <div class="post-subtags">
-                        <span class="subtag">#PaperReview</span>
-                        <span class="subtag">#USENIX_Security</span>
-                        <span class="subtag">#PDF_Forensics</span>
-                    </div>
-                </a>
-            </div>
-        </div>
 
         <div id="cert" class="page">
             <a href="#" class="back-btn">← 메인 화면으로 돌아가기</a>
