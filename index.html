@@ -1,154 +1,351 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>DFIR &amp; Cyber Security Archive | 김민경</title>
-<!-- 트렌디한 모던 폰트 (Inter & Fira Code) -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
-<link href="style.css" rel="stylesheet"/></head>
+    <title>DFIR &amp; Cyber Security Archive | 김민경</title>
+
+    <!-- 트렌디한 모던 폰트 (Inter & Fira Code) -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+
+    <link href="style.css" rel="stylesheet"/>
+</head>
+
 <body>
 <div class="container">
-<!-- ==================== [페이지 1] 미션 #4 본문 ==================== -->
 
-<!-- ==================== [페이지 2] VAPD 논문 심층 리뷰 상세 본문 ==================== -->
+    <!-- ==================== [페이지 1] 미션 #4 본문 ==================== -->
 
-<!-- ==================== [신규 게시글] IDS/IPS 학습 정리 ==================== -->
+    <!-- ==================== [페이지 2] VAPD 논문 심층 리뷰 상세 본문 ==================== -->
 
-<!-- ==================== [블로그 / 기술문서 목록] ==================== -->
-<div class="page" id="doc">
-<a class="back-btn" href="#">← 메인 화면으로 돌아가기</a>
-<div class="page-header"><h1>📝 블로그 / 기술문서</h1>
-<p style="color:var(--text-secondary)">보안 개념 학습과 기술 문서를 기록하는 공간입니다.</p></div>
-<div class="post-list">
-<a class="post-card" href="posts/ids-ips.html">
-<div class="post-meta"><span>2026.11.12</span><span>Network Security</span></div>
-<h3 class="post-title">🛡️ 침입 탐지 및 방지 시스템(IDS/IPS)</h3>
-<p class="post-desc">IDS와 IPS의 개념, 동작 원리, 유형, 활용 방법, 장단점 및 차이점 학습 정리</p>
-<div class="post-subtags"><span class="subtag">IDS</span><span class="subtag">IPS</span><span class="subtag">Network Security</span></div>
-</a>
-<a class="post-card" href="posts/mission4.html">
-<div class="post-meta"><span>2026.11.07</span><span>필수 미션</span></div>
-<h3 class="post-title">📝 미션 #4 - '나'에 대해 기록하기</h3>
-<p class="post-desc">가치관, 진로, 활동 목표를 정리한 자기 탐색 기록</p>
-<div class="post-subtags"><span class="subtag">Reflection</span><span class="subtag">Mission</span></div>
-</a>
-</div></div>
-<!-- ==================== [논문 / 컨퍼런스 목록] ==================== -->
-<div class="page" id="conf">
-<a class="back-btn" href="#">← 메인 화면으로 돌아가기</a>
-<div class="page-header"><h1>🎓 논문 / 컨퍼런스</h1>
-<p style="color:var(--text-secondary)">보안 논문 리뷰 및 연구 학습 기록입니다.</p></div>
-<div class="post-list"><a class="post-card" href="posts/vapd.html">
-<div class="post-meta"><span>2026.11.07</span><span>USENIX Security '25</span></div>
-<h3 class="post-title">🎓 VAPD: An Anomaly Detection Model for PDF Malware Forensics with Adversarial Robustness</h3>
-<p class="post-desc">악성 PDF 이상 탐지와 적대적 강인성, 이상 위치 식별에 관한 논문 심층 리뷰</p>
-<div class="post-subtags"><span class="subtag">Paper Review</span><span class="subtag">DFIR</span></div>
-</a></div></div>
-<div class="page" id="cert">
-<a class="back-btn" href="#">← 메인 화면으로 돌아가기</a>
-<div class="page-header">
-<h1>🏆 공모전 / 자격증</h1>
-<p style="color: var(--text-secondary); margin: 6px 0 0 0;">대외활동, 보안 경진대회 및 보안 관련 자격증 로드맵 기록 공간입니다.</p>
+    <!-- ==================== [신규 게시글] IDS/IPS 학습 정리 ==================== -->
+
+    <!-- ==================== [신규 게시글] Fuzzer & Fuzzing 학습 정리 ==================== -->
+
+    <!-- ==================== [블로그 / 기술문서 목록] ==================== -->
+    <div class="page" id="doc">
+
+        <a class="back-btn" href="#">← 메인 화면으로 돌아가기</a>
+
+        <div class="page-header">
+            <h1>📝 블로그 / 기술문서</h1>
+            <p style="color:var(--text-secondary)">
+                보안 개념 학습과 기술 문서를 기록하는 공간입니다.
+            </p>
+        </div>
+
+        <div class="post-list">
+
+            <!-- Fuzzer & Fuzzing 게시글 -->
+            <a class="post-card" href="posts/fuzzing.html">
+
+                <div class="post-meta">
+                    <span>2026.11.13</span>
+                    <span>Software Security</span>
+                </div>
+
+                <h3 class="post-title">
+                    🧪 Fuzzer와 Fuzzing - 퍼징 기법과 퍼저 비교
+                </h3>
+
+                <p class="post-desc">
+                    퍼징의 정의와 동작 원리, 종류,
+                    AFL++·Jackalope·libFuzzer의 특징 및 차이점 학습 정리
+                </p>
+
+                <div class="post-subtags">
+                    <span class="subtag">Fuzzing</span>
+                    <span class="subtag">Fuzzer</span>
+                    <span class="subtag">Software Security</span>
+                </div>
+
+            </a>
+
+            <!-- IDS/IPS 게시글 -->
+            <a class="post-card" href="posts/ids-ips.html">
+
+                <div class="post-meta">
+                    <span>2026.11.12</span>
+                    <span>Network Security</span>
+                </div>
+
+                <h3 class="post-title">
+                    🛡️ 침입 탐지 및 방지 시스템(IDS/IPS)
+                </h3>
+
+                <p class="post-desc">
+                    IDS와 IPS의 개념, 동작 원리, 유형,
+                    활용 방법, 장단점 및 차이점 학습 정리
+                </p>
+
+                <div class="post-subtags">
+                    <span class="subtag">IDS</span>
+                    <span class="subtag">IPS</span>
+                    <span class="subtag">Network Security</span>
+                </div>
+
+            </a>
+
+            <!-- 미션 #4 게시글 -->
+            <a class="post-card" href="posts/mission4.html">
+
+                <div class="post-meta">
+                    <span>2026.11.07</span>
+                    <span>필수 미션</span>
+                </div>
+
+                <h3 class="post-title">
+                    📝 미션 #4 - '나'에 대해 기록하기
+                </h3>
+
+                <p class="post-desc">
+                    가치관, 진로, 활동 목표를 정리한 자기 탐색 기록
+                </p>
+
+                <div class="post-subtags">
+                    <span class="subtag">Reflection</span>
+                    <span class="subtag">Mission</span>
+                </div>
+
+            </a>
+
+        </div>
+    </div>
+
+    <!-- ==================== [논문 / 컨퍼런스 목록] ==================== -->
+    <div class="page" id="conf">
+
+        <a class="back-btn" href="#">← 메인 화면으로 돌아가기</a>
+
+        <div class="page-header">
+            <h1>🎓 논문 / 컨퍼런스</h1>
+            <p style="color:var(--text-secondary)">
+                보안 논문 리뷰 및 연구 학습 기록입니다.
+            </p>
+        </div>
+
+        <div class="post-list">
+
+            <a class="post-card" href="posts/vapd.html">
+
+                <div class="post-meta">
+                    <span>2026.11.07</span>
+                    <span>USENIX Security '25</span>
+                </div>
+
+                <h3 class="post-title">
+                    🎓 VAPD: An Anomaly Detection Model for PDF Malware Forensics with Adversarial Robustness
+                </h3>
+
+                <p class="post-desc">
+                    악성 PDF 이상 탐지와 적대적 강인성,
+                    이상 위치 식별에 관한 논문 심층 리뷰
+                </p>
+
+                <div class="post-subtags">
+                    <span class="subtag">Paper Review</span>
+                    <span class="subtag">DFIR</span>
+                </div>
+
+            </a>
+
+        </div>
+    </div>
+
+    <!-- ==================== [공모전 / 자격증] ==================== -->
+    <div class="page" id="cert">
+
+        <a class="back-btn" href="#">← 메인 화면으로 돌아가기</a>
+
+        <div class="page-header">
+            <h1>🏆 공모전 / 자격증</h1>
+            <p style="color: var(--text-secondary); margin: 6px 0 0 0;">
+                대외활동, 보안 경진대회 및 보안 관련 자격증 로드맵 기록 공간입니다.
+            </p>
+        </div>
+
+        <div class="post-list">
+            <div class="empty-notice">
+                📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ==================== [개인공부] ==================== -->
+    <div class="page" id="study">
+
+        <a class="back-btn" href="#">← 메인 화면으로 돌아가기</a>
+
+        <div class="page-header">
+            <h1>📖 개인공부 (Study &amp; Note)</h1>
+            <p style="color: var(--text-secondary); margin: 6px 0 0 0;">
+                전공 수업 복습, 자습 노트, 개인 메모 공간입니다.
+            </p>
+        </div>
+
+        <div class="post-list">
+            <div class="empty-notice">
+                📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ==================== [메인 홈 화면] ==================== -->
+    <div id="home-view">
+
+        <div class="system-bar">
+            <div>
+                <span class="status-dot"></span>
+                SYSTEM STATUS: ONLINE
+            </div>
+            <div id="live-time">KST --:--:--</div>
+        </div>
+
+        <div class="site-header">
+            <h1>🛡️ DFIR &amp; Cyber Security Archive</h1>
+            <button class="theme-toggle-btn" onclick="toggleTheme()">
+                🌓 Theme
+            </button>
+        </div>
+
+        <div class="profile-card">
+
+            <div class="profile-avatar">👩‍💻</div>
+
+            <div class="profile-info">
+
+                <h2>
+                    안녕하세요! 상명대 CodeCure 김민경입니다.
+                </h2>
+
+                <p>
+                    정보보안공학과에 재학중이고 26학번입니다!
+                    차근차근 배우며 성장하는 개발 및 보안 탐구 기록 공간입니다.
+                </p>
+
+                <div class="profile-tags">
+                    <span class="tag">#WebSecurity</span>
+                    <span class="tag">#SystemSecurity</span>
+                    <span class="tag">#DigitalForensics</span>
+                    <span class="tag">#DFIR</span>
+                    <span class="tag">#C/Python/Java</span>
+                    <span class="tag">#StudyNote</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 검색창 -->
+        <div class="search-container">
+            <input
+                class="search-input"
+                id="searchInput"
+                onkeyup="filterCards()"
+                placeholder="🔍 카테고리 검색 (예: 개발, CTF, 포렌식, 자격증...)"
+                type="text"
+            />
+        </div>
+
+        <h2>📌 카테고리</h2>
+
+        <div class="grid" id="cardGrid">
+
+            <a class="card-item" href="#dev">
+                <div class="card">
+                    <h3>💻 개발</h3>
+                    <p>C, Python, Java 언어 및 개발 기록</p>
+                </div>
+            </a>
+
+            <a class="card-item" href="#ctf">
+                <div class="card">
+                    <h3>🛡️ CTF / Wargame</h3>
+                    <p>보안 문제 풀이 및 시스템/웹 분석</p>
+                </div>
+            </a>
+
+            <a class="card-item" href="#bug">
+                <div class="card">
+                    <h3>🔍 Bug Bounty</h3>
+                    <p>취약점 분석 및 버그바운티 연구</p>
+                </div>
+            </a>
+
+            <a class="card-item" href="#doc">
+                <div class="card">
+                    <h3>📝 블로그 / 기술문서</h3>
+                    <p>포렌식, DFIR, OS, 네트워크 기술 문서</p>
+                </div>
+            </a>
+
+            <a class="card-item" href="#conf">
+                <div class="card">
+                    <h3>🎓 논문 / 컨퍼런스</h3>
+                    <p>보안 학술 논문 리뷰 및 세미나 기록</p>
+                </div>
+            </a>
+
+            <a class="card-item" href="#cert">
+                <div class="card">
+                    <h3>🏆 공모전 / 자격증</h3>
+                    <p>동아리 성과 및 자격증 로드맵 기록</p>
+                </div>
+            </a>
+
+            <a class="card-item" href="#study">
+                <div class="card">
+                    <h3>📖 개인공부</h3>
+                    <p>전공 자습 복습 및 메모 노트</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
 </div>
-<div class="post-list">
-<div class="empty-notice">📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!</div>
-</div>
-</div>
-<div class="page" id="study">
-<a class="back-btn" href="#">← 메인 화면으로 돌아가기</a>
-<div class="page-header">
-<h1>📖 개인공부 (Study &amp; Note)</h1>
-<p style="color: var(--text-secondary); margin: 6px 0 0 0;">전공 수업 복습, 자습 노트, 개인 메모 공간입니다.</p>
-</div>
-<div class="post-list">
-<div class="empty-notice">📂 아직 등록된 게시글이 없습니다. 새로운 기록을 작성해 보세요!</div>
-</div>
-</div>
-<!-- ==================== [메인 홈 화면] ==================== -->
-<div id="home-view">
-<div class="system-bar">
-<div><span class="status-dot"></span>SYSTEM STATUS: ONLINE</div>
-<div id="live-time">KST --:--:--</div>
-</div>
-<div class="site-header">
-<h1>🛡️ DFIR &amp; Cyber Security Archive</h1>
-<button class="theme-toggle-btn" onclick="toggleTheme()">🌓 Theme</button>
-</div>
-<div class="profile-card">
-<div class="profile-avatar">👩‍💻</div>
-<div class="profile-info">
-<h2>안녕하세요! 상명대 CodeCure 김민경입니다.</h2>
-<p>정보보안공학과에 재학중이고 26학번입니다! 차근차근 배우며 성장하는 개발 및 보안 탐구 기록 공간입니다.</p>
-<div class="profile-tags">
-<span class="tag">#WebSecurity</span>
-<span class="tag">#SystemSecurity</span>
-<span class="tag">#DigitalForensics</span>
-<span class="tag">#DFIR</span>
-<span class="tag">#C/Python/Java</span>
-<span class="tag">#StudyNote</span>
-</div>
-</div>
-</div>
-<div class="search-container">
-<input class="search-input" id="searchInput" onkeyup="filterCards()" placeholder="🔍 카테고리 검색 (예: 개발, CTF, 포렌식, 자격증...)" type="text"/>
-</div>
-<h2>📌 카테고리</h2>
-<div class="grid" id="cardGrid">
-<a class="card-item" href="#dev">
-<div class="card"><h3>💻 개발</h3><p>C, Python, Java 언어 및 개발 기록</p></div>
-</a>
-<a class="card-item" href="#ctf">
-<div class="card"><h3>🛡️ CTF / Wargame</h3><p>보안 문제 풀이 및 시스템/웹 분석</p></div>
-</a>
-<a class="card-item" href="#bug">
-<div class="card"><h3>🔍 Bug Bounty</h3><p>취약점 분석 및 버그바운티 연구</p></div>
-</a>
-<a class="card-item" href="#doc">
-<div class="card"><h3>📝 블로그 / 기술문서</h3><p>포렌식, DFIR, OS, 네트워크 기술 문서</p></div>
-</a>
-<a class="card-item" href="#conf">
-<div class="card"><h3>🎓 논문 / 컨퍼런스</h3><p>보안 학술 논문 리뷰 및 세미나 기록</p></div>
-</a>
-<a class="card-item" href="#cert">
-<div class="card"><h3>🏆 공모전 / 자격증</h3><p>동아리 성과 및 자격증 로드맵 기록</p></div>
-</a>
-<a class="card-item" href="#study">
-<div class="card"><h3>📖 개인공부</h3><p>전공 자습 복습 및 메모 노트</p></div>
-</a>
-</div>
-</div>
-</div>
+
 <script>
-        function updateClock() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('ko-KR', { hour12: false });
-            document.getElementById('live-time').innerText = 'KST ' + timeString;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
+    function updateClock() {
+        const now = new Date();
 
-        function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-        }
+        const timeString = now.toLocaleTimeString('ko-KR', {
+            hour12: false
+        });
 
-        function filterCards() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const cards = document.querySelectorAll('.card-item');
+        document.getElementById('live-time').innerText =
+            'KST ' + timeString;
+    }
 
-            cards.forEach(card => {
-                const text = card.innerText.toLowerCase();
-                if (text.includes(input)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-    </script>
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function toggleTheme() {
+        document.body.classList.toggle('light-mode');
+    }
+
+    function filterCards() {
+        const input = document.getElementById('searchInput')
+            .value.toLowerCase();
+
+        const cards = document.querySelectorAll('.card-item');
+
+        cards.forEach(card => {
+            const text = card.innerText.toLowerCase();
+
+            if (text.includes(input)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
+
 </body>
 </html>
