@@ -28,6 +28,9 @@
 
     <!-- ==================== [신규 게시글] OWASP Top 10 학습 정리 ==================== -->
 
+    <!-- ==================== [신규 게시글] 개인정보 보호법 판례 분석 ==================== -->
+
+
     <!-- ==================== [블로그 / 기술문서 목록] ==================== -->
     <div class="page" id="doc">
 
@@ -42,7 +45,35 @@
 
         <div class="post-list">
 
-            <!-- OWASP Top 10 (2025) 게시글 -->
+            <!-- ==================== 개인정보 보호법 판례 분석 게시글 ==================== -->
+            <a class="post-card" href="posts/privacy-case.html">
+
+                <div class="post-meta">
+                    <span>2026.11.17</span>
+                    <span>Privacy Law</span>
+                </div>
+
+                <h3 class="post-title">
+                    ⚖️ 개인정보 보호법 판례 분석 - 공개된 개인정보의 수집과 이용
+                </h3>
+
+                <p class="post-desc">
+                    대법원 2014다235080 판결을 중심으로
+                    공개된 개인정보의 상업적 이용,
+                    개인정보자기결정권, 법원의 판단 기준 및
+                    상급심 판결 비교와 실무적 시사점 분석
+                </p>
+
+                <div class="post-subtags">
+                    <span class="subtag">Privacy Law</span>
+                    <span class="subtag">Case Study</span>
+                    <span class="subtag">Personal Information</span>
+                </div>
+
+            </a>
+
+
+            <!-- ==================== OWASP Top 10 (2025) 게시글 ==================== -->
             <a class="post-card" href="posts/owasp-injection.html">
 
                 <div class="post-meta">
@@ -68,7 +99,8 @@
 
             </a>
 
-            <!-- Fuzzer & Fuzzing 게시글 -->
+
+            <!-- ==================== Fuzzer & Fuzzing 게시글 ==================== -->
             <a class="post-card" href="posts/fuzzing.html">
 
                 <div class="post-meta">
@@ -93,7 +125,8 @@
 
             </a>
 
-            <!-- IDS/IPS 게시글 -->
+
+            <!-- ==================== IDS/IPS 게시글 ==================== -->
             <a class="post-card" href="posts/ids-ips.html">
 
                 <div class="post-meta">
@@ -118,7 +151,8 @@
 
             </a>
 
-            <!-- 미션 #4 게시글 -->
+
+            <!-- ==================== 미션 #4 게시글 ==================== -->
             <a class="post-card" href="posts/mission4.html">
 
                 <div class="post-meta">
@@ -143,6 +177,7 @@
 
         </div>
     </div>
+
 
     <!-- ==================== [논문 / 컨퍼런스 목록] ==================== -->
     <div class="page" id="conf">
@@ -184,6 +219,7 @@
         </div>
     </div>
 
+
     <!-- ==================== [공모전 / 자격증] ==================== -->
     <div class="page" id="cert">
 
@@ -204,6 +240,7 @@
 
     </div>
 
+
     <!-- ==================== [개인공부] ==================== -->
     <div class="page" id="study">
 
@@ -223,6 +260,7 @@
         </div>
 
     </div>
+
 
     <!-- ==================== [메인 홈 화면] ==================== -->
     <div id="home-view">
@@ -269,7 +307,8 @@
             </div>
         </div>
 
-        <!-- 검색창 -->
+
+        <!-- ==================== 검색창 ==================== -->
         <div class="search-container">
             <input
                 class="search-input"
@@ -279,6 +318,7 @@
                 type="text"
             />
         </div>
+
 
         <h2>📌 카테고리</h2>
 
@@ -338,6 +378,7 @@
 
 </div>
 
+
 <script>
     function updateClock() {
         const now = new Date();
@@ -353,9 +394,11 @@
     setInterval(updateClock, 1000);
     updateClock();
 
+
     function toggleTheme() {
         document.body.classList.toggle('light-mode');
     }
+
 
     function filterCards() {
         const input = document.getElementById('searchInput')
