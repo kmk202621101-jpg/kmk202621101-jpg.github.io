@@ -317,13 +317,14 @@ td {
     color: #c4d0df;
 }
 
+/* 참고자료: 상위 항목에만 번호와 카드 적용 */
 .references {
     list-style: none;
     padding: 0 !important;
     counter-reset: ref;
 }
 
-.references li {
+.references > li {
     counter-increment: ref;
     padding: 19px;
     margin-bottom: 12px;
@@ -333,11 +334,36 @@ td {
     overflow-wrap: anywhere;
 }
 
-.references li::before {
+.references > li::before {
     content: counter(ref, decimal-leading-zero);
     color: var(--cyan);
     font-family: "Fira Code", monospace;
     margin-right: 12px;
+}
+
+/* 참고 부분의 숫자와 중첩 카드 제거 */
+.references ul {
+    list-style: disc;
+    padding-left: 24px;
+    margin: 10px 0 18px;
+}
+
+.references ul li {
+    counter-increment: none;
+    padding: 0;
+    margin: 7px 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    color: #c4d0df;
+}
+
+.references ul li::before {
+    content: none;
+}
+
+.references ul li::marker {
+    color: var(--cyan);
 }
 
 .references a {
@@ -649,6 +675,7 @@ td {
     </p>
 
     <div class="grid">
+
         <div class="card">
             <h4>개인정보 유출</h4>
             <p>
@@ -689,6 +716,7 @@ td {
                 추가적인 보안 위협으로 이어질 수 있다.
             </p>
         </div>
+
     </div>
 
     <div class="success">
@@ -879,6 +907,7 @@ td {
                 「티빙 민관합동조사단 조사결과 주요내용」
                 (2026.09.04)
             </p>
+
             <p><strong>참고 부분</strong></p>
             <ul>
                 <li>사고 발생 및 신고 과정</li>
@@ -886,6 +915,7 @@ td {
                 <li>개발 프로젝트와 개인정보 유출 규모</li>
                 <li>사고 원인 및 조사 결과</li>
             </ul>
+
             <a href="https://m.korea.kr/briefing/policyBriefingView.do?newsId=156780195"
                target="_blank" rel="noopener noreferrer">
                 https://m.korea.kr/briefing/policyBriefingView.do?newsId=156780195
@@ -899,6 +929,7 @@ td {
                 활성·휴면·탈퇴 계정 모두 유출」
                 (2026.09.03)
             </p>
+
             <p><strong>참고 부분</strong></p>
             <ul>
                 <li>접속키 관리 부실</li>
@@ -907,6 +938,7 @@ td {
                 <li>보안 취약점 미조치</li>
                 <li>재발 방지 권고사항</li>
             </ul>
+
             <a href="https://www.yna.co.kr/amp/view/AKR20260903132000017"
                target="_blank" rel="noopener noreferrer">
                 https://www.yna.co.kr/amp/view/AKR20260903132000017
