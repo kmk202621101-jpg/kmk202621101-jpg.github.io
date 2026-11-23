@@ -1,0 +1,957 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>티빙 개인정보 유출 사고 | DFIR & Cyber Security Archive</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --soft: #1c2633;
+    --border: #303d4f;
+    --text: #e6edf3;
+    --muted: #9aabc0;
+    --blue: #58a6ff;
+    --cyan: #39d5c8;
+    --purple: #b69cff;
+    --orange: #fbbf77;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 15px;
+    line-height: 1.95;
+    word-break: keep-all;
+}
+
+a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+a:hover { text-decoration: underline; }
+
+.container {
+    max-width: 1050px;
+    margin: auto;
+    padding: 28px 24px 90px;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.back {
+    padding: 10px 15px;
+    background: #152131;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 12px;
+    color: #cbd5e1;
+}
+
+.archive {
+    font-family: "Fira Code", monospace;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.hero {
+    padding: 43px;
+    background:
+        radial-gradient(circle at 90% 0%, rgba(57,213,200,.12), transparent 40%),
+        linear-gradient(135deg, #172c40, #171827);
+    border: 1px solid #38506a;
+    border-radius: 22px;
+    margin-bottom: 34px;
+}
+
+.eyebrow {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 30px;
+    background: rgba(57,213,200,.10);
+    border: 1px solid rgba(57,213,200,.3);
+    color: var(--cyan);
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    margin: 0 0 18px;
+    font-size: clamp(27px, 4vw, 39px);
+    line-height: 1.45;
+    letter-spacing: -1px;
+}
+
+.hero p {
+    max-width: 750px;
+    color: #bac8d8;
+    margin: 0;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 25px;
+}
+
+.tags span {
+    padding: 5px 13px;
+    border: 1px solid #3b5870;
+    background: #192d40;
+    color: #b5d8f2;
+    border-radius: 30px;
+    font-family: "Fira Code", monospace;
+    font-size: 11px;
+}
+
+.hero-foot {
+    margin-top: 24px;
+    text-align: right;
+    color: #90a3ba;
+    font-size: 10px;
+    font-family: "Fira Code", monospace;
+    letter-spacing: 2px;
+}
+
+.contents {
+    padding: 26px 24px;
+    margin-bottom: 34px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 17px;
+}
+
+.contents h2 {
+    margin: 0 0 16px;
+    color: var(--cyan);
+    font-family: "Fira Code", monospace;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+}
+
+.toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 11px;
+}
+
+.toc a {
+    padding: 9px 13px;
+    background: #131a24;
+    border: 1px solid #344256;
+    border-radius: 10px;
+    color: #b8c7da;
+    font-size: 13px;
+    transition: .2s;
+}
+
+.toc a:hover {
+    color: var(--blue);
+    border-color: var(--blue);
+    background: #1b2a3d;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+.section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 36px;
+    margin-bottom: 25px;
+    scroll-margin-top: 25px;
+}
+
+.section h2 {
+    margin: 0 0 26px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+    font-size: 23px;
+    line-height: 1.5;
+}
+
+.section h2 span {
+    color: var(--cyan);
+    font-family: "Fira Code", monospace;
+    margin-right: 8px;
+}
+
+.section h3 {
+    color: var(--blue);
+    font-size: 18px;
+    margin: 32px 0 14px;
+}
+
+.section p { margin: 13px 0; }
+
+.section ul,
+.section ol { padding-left: 24px; }
+
+.section li { margin: 8px 0; }
+
+.section li::marker { color: var(--cyan); }
+
+.info, .success, .warning {
+    padding: 18px 20px;
+    margin: 20px 0;
+    border-radius: 0 11px 11px 0;
+}
+
+.info {
+    background: rgba(88,166,255,.07);
+    border-left: 3px solid var(--blue);
+}
+
+.success {
+    background: rgba(57,213,200,.07);
+    border-left: 3px solid var(--cyan);
+}
+
+.warning {
+    background: rgba(251,191,119,.07);
+    border-left: 3px solid var(--orange);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+    margin: 20px 0;
+}
+
+.card {
+    padding: 20px;
+    background: var(--soft);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+}
+
+.card h4 {
+    color: var(--cyan);
+    margin: 0 0 9px;
+    font-size: 15px;
+}
+
+.card p {
+    margin: 0;
+    color: #bdcad9;
+    font-size: 13px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+th {
+    background: #202e3e;
+    color: #bce8ff;
+    text-align: left;
+    padding: 14px 16px;
+}
+
+td {
+    padding: 14px 16px;
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+}
+
+.timeline {
+    margin: 25px 0;
+    padding-left: 27px;
+    border-left: 2px solid #36506b;
+}
+
+.timeline-item {
+    position: relative;
+    padding: 0 0 25px 10px;
+}
+
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -34px;
+    top: 8px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--cyan);
+    border: 3px solid #163b43;
+}
+
+.timeline-item strong { color: var(--cyan); }
+
+.timeline-item p {
+    margin: 6px 0 0;
+    color: #c4d0df;
+}
+
+/* 참고자료: 상위 항목에만 번호와 카드 적용 */
+.references {
+    list-style: none;
+    padding: 0 !important;
+    counter-reset: ref;
+}
+
+.references > li {
+    counter-increment: ref;
+    padding: 19px;
+    margin-bottom: 12px;
+    background: #1b2531;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow-wrap: anywhere;
+}
+
+.references > li::before {
+    content: counter(ref, decimal-leading-zero);
+    color: var(--cyan);
+    font-family: "Fira Code", monospace;
+    margin-right: 12px;
+}
+
+/* 참고 부분의 숫자와 중첩 카드 제거 */
+.references ul {
+    list-style: disc;
+    padding-left: 24px;
+    margin: 10px 0 18px;
+}
+
+.references ul li {
+    counter-increment: none;
+    padding: 0;
+    margin: 7px 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    color: #c4d0df;
+}
+
+.references ul li::before {
+    content: none;
+}
+
+.references ul li::marker {
+    color: var(--cyan);
+}
+
+.references a {
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.footer {
+    padding: 25px 0;
+    color: var(--muted);
+    text-align: center;
+    font-size: 12px;
+}
+
+@media (max-width: 700px) {
+    .container { padding: 14px 12px 55px; }
+    .hero { padding: 28px 21px; }
+    .section { padding: 24px 19px; }
+    .section h2 { font-size: 20px; }
+    .contents { padding: 22px 17px; }
+    .toc { gap: 9px; }
+    .toc a { font-size: 12px; padding: 8px 10px; }
+    .grid { grid-template-columns: 1fr; }
+    .archive { display: none; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="top-nav">
+    <a class="back" href="../index.html#doc">← 블로그 목록으로 돌아가기</a>
+    <span class="archive">DFIR / CYBER SECURITY ARCHIVE</span>
+</div>
+
+<header class="hero">
+    <div class="eyebrow">SECURITY INCIDENT · CASE STUDY</div>
+
+    <h1>티빙 개인정보 유출 사고</h1>
+
+    <p>
+        2026년 티빙에서 발생한 개인정보 유출 사고를 중심으로
+        침입 경로, 사고 원인, 피해 규모, 대응 과정과
+        재발 방지를 위한 개선 방안을 분석한 학습 기록입니다.
+    </p>
+
+    <div class="tags">
+        <span>TVING</span>
+        <span>Data Breach</span>
+        <span>Incident Analysis</span>
+        <span>2026</span>
+    </div>
+
+    <div class="hero-foot">01 / SECURITY INCIDENT ANALYSIS</div>
+</header>
+
+<!-- 목차 -->
+<div class="contents">
+    <h2>CONTENTS</h2>
+    <nav class="toc">
+        <a href="#overview">01 · 사고 개요</a>
+        <a href="#process">02 · 사고 발생 과정</a>
+        <a href="#cause">03 · 사고의 원인</a>
+        <a href="#damage">04 · 피해 규모 및 영향</a>
+        <a href="#response">05 · 사고 대응 과정</a>
+        <a href="#problems">06 · 보안상 미흡했던 부분</a>
+        <a href="#improvement">07 · 재발 방지 방안</a>
+        <a href="#reflection">08 · 느낀 점</a>
+        <a href="#references">09 · 참고자료</a>
+    </nav>
+</div>
+
+<!-- 01 -->
+<section class="section" id="overview">
+    <h2><span>01.</span> 사고 개요</h2>
+
+    <div class="table-wrap">
+        <table>
+            <tbody>
+                <tr><th>사고 기업</th><td>티빙(TVING)</td></tr>
+                <tr><th>사고 발견</th><td>2026년 5월 30일</td></tr>
+                <tr><th>침해사고 신고</th><td>2026년 6월 1일</td></tr>
+                <tr><th>조사 결과 발표</th><td>2026년 9월 3일</td></tr>
+                <tr><th>사고 유형</th><td>비인가 시스템 접근 및 개인정보 유출</td></tr>
+                <tr><th>유출 규모</th><td>약 3,954만 개 계정(중복 포함)</td></tr>
+                <tr><th>주요 원인</th><td>개발자 접속키 탈취 및 부실한 접근 권한 관리</td></tr>
+                <tr><th>조사 기관</th><td>과학기술정보통신부, 한국인터넷진흥원 등 민관합동조사단</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>
+        2026년 국내 온라인 OTT 플랫폼인 티빙에서
+        대규모 개인정보 유출 사고가 발생하였다.
+        티빙은 다양한 영상 콘텐츠를 제공하는 서비스로
+        많은 이용자의 개인정보를 보유하고 있다.
+    </p>
+
+    <p>
+        이번 사고는 공격자가 개발자의 시스템 접속키를 탈취하여
+        티빙 내부 시스템에 무단으로 접근하면서 발생하였다.
+        공격자는 내부 시스템에 저장된 개발 프로젝트와
+        이용자 정보를 유출하였고, 이 과정에서 티빙의
+        접속키 관리와 접근 통제에 문제가 있었던 것으로 확인되었다.
+    </p>
+
+    <p>
+        티빙은 2026년 5월 30일 데이터베이스 서버에서
+        비정상적인 과부하 현상을 발견하였고,
+        이후 조사 과정에서 외부 공격자의 무단 접근 사실을 확인하였다.
+        6월 1일 한국인터넷진흥원(KISA)에 침해사고를 신고하였으며,
+        관계 기관의 조사가 진행되었다.
+    </p>
+
+    <p>
+        2026년 9월 3일 발표된 민관합동조사단의 조사 결과에 따르면
+        약 3,954만 개의 이용자 계정과 소스코드가 포함된
+        개발 프로젝트 361건이 유출된 것으로 확인되었다.
+        유출된 계정에는 중복 계정도 포함되어 있어
+        실제 피해 인원과는 차이가 있다.
+    </p>
+
+    <div class="success">
+        이번 사고는 단순한 개인정보 유출을 넘어
+        기업의 접속키 관리, 접근 권한 설정,
+        이상 징후 탐지 등 기본적인 보안 관리가
+        얼마나 중요한지를 보여주는 사례라고 생각한다.
+    </div>
+</section>
+
+<!-- 02 -->
+<section class="section" id="process">
+    <h2><span>02.</span> 사고 발생 과정</h2>
+
+    <p>
+        2026년 티빙 개인정보 유출 사고는 공격자가
+        개발자의 접속키를 탈취하여 내부 시스템에 침입하면서 시작되었다.
+        이후 개발환경에서 운영환경으로 접근 범위를 확대하였고,
+        최종적으로 대규모 개인정보를 유출하였다.
+    </p>
+
+    <div class="timeline">
+
+        <div class="timeline-item">
+            <strong>(1) 개발환경 침입 및 개발 프로젝트 유출</strong>
+            <p>
+                공격자는 탈취한 개발환경 접속키를 이용해
+                내부 시스템에 접근하였다.
+                이후 두 차례의 공격을 통해
+                총 361건의 개발 프로젝트를 유출하였다.
+                하지만 최초 접속키가 어떤 방법으로
+                탈취되었는지는 확인되지 않았다.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <strong>(2) 운영환경 접속키 확보</strong>
+            <p>
+                공격자는 유출한 개발 프로젝트의 소스코드에서
+                운영환경 접속키 43개를 확보하였다.
+                일부 접속키는 암호화되지 않은 상태로 저장되어 있었으며,
+                이를 이용해 실제 서비스 운영 시스템에 접근할 수 있었다.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <strong>(3) 데이터베이스 접근 정보 확보</strong>
+            <p>
+                공격자는 운영환경에 침입한 뒤
+                내부 시스템에서 데이터베이스 접속에 필요한
+                아이디와 비밀번호를 발견하였다.
+                해당 정보도 암호화되지 않은 상태로 저장되어 있어
+                이용자 정보에 접근할 수 있었다.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <strong>(4) 1차 개인정보 유출 시도</strong>
+            <p>
+                2026년 5월 30일 공격자는 데이터베이스에 접근하여
+                개인정보 유출을 시도하였다.
+                이 과정에서 서버의 CPU 사용률이 100%까지
+                상승하면서 경고가 발생하였다.
+                티빙은 해당 작업을 차단했지만,
+                당시에는 단순한 시스템 과부하 문제로 판단하였다.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <strong>(5) 2차 공격 및 대규모 정보 유출</strong>
+            <p>
+                5월 31일 공격자는 다른 접속키를 이용해
+                새로운 가상서버를 생성하고,
+                데이터베이스의 이용자 정보를 외부 서버로 전송하였다.
+                이번에는 CPU 사용률을 10% 이내로 유지하여
+                과부하 경고가 발생하지 않았으며,
+                유출 이후 가상서버를 삭제하였다.
+            </p>
+        </div>
+
+        <div class="timeline-item">
+            <strong>(6) 사고 신고 및 조사</strong>
+            <p>
+                티빙은 6월 1일 한국인터넷진흥원(KISA)에
+                침해사고를 신고하였다.
+                이후 민관합동조사단이 구성되어
+                침입 경로와 피해 규모를 조사하였고,
+                9월 3일 조사 결과가 발표되었다.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="warning">
+        이번 사고는 개발환경의 접속키 탈취가
+        실제 서비스 운영 시스템의 침해로 이어졌으며,
+        초기 이상 징후가 발견되었음에도
+        추가적인 개인정보 유출을 막지 못했다는 특징이 있다.
+    </div>
+</section>
+
+<!-- 03 -->
+<section class="section" id="cause">
+    <h2><span>03.</span> 사고의 원인</h2>
+
+    <p>
+        2026년 티빙 개인정보 유출 사고는 개발환경 접속키 탈취를
+        시작으로 접속 정보 관리 부실과 접근 권한 통제 부족 등
+        여러 보안 문제가 복합적으로 작용하면서 발생하였다.
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+            <h4>01. 접속키 관리 부실</h4>
+            <p>
+                공격자는 개발자의 접속키를 탈취하여
+                내부 시스템에 접근하였다.
+                또한 개발 프로젝트의 소스코드에
+                운영환경 접속키 43개가 포함되어 있었으며,
+                일부는 암호화되지 않은 상태로 저장되어 있었다.
+                이러한 관리 부족으로 공격자가
+                추가적인 시스템 접근 권한을 확보할 수 있었다.
+            </p>
+        </div>
+
+        <div class="card">
+            <h4>02. 데이터베이스 접속 정보 보호 미흡</h4>
+            <p>
+                운영환경 내부에는 데이터베이스에 접근할 수 있는
+                아이디와 비밀번호가 암호화되지 않은 상태로 저장되어 있었다.
+                이로 인해 공격자는 운영환경에 침입한 이후
+                별도의 복잡한 공격 과정 없이
+                데이터베이스 접속 정보를 확보할 수 있었다.
+            </p>
+        </div>
+
+        <div class="card">
+            <h4>03. 접근 권한 통제 부족</h4>
+            <p>
+                개발환경에서 확보한 접속 정보가
+                실제 서비스 운영환경에 접근하는 데 사용되었다.
+                개발환경과 운영환경은 목적이 다르므로
+                접근 권한을 구분하고 필요한 사용자에게만
+                최소한의 권한을 부여해야 하지만,
+                추가적인 시스템 접근을 충분히 제한하지 못하였다.
+            </p>
+        </div>
+
+        <div class="card">
+            <h4>04. 이상 징후 탐지 및 대응 미흡</h4>
+            <p>
+                5월 30일 데이터베이스 서버에서 비정상적인
+                CPU 사용률 증가가 발견되었지만,
+                당시에는 단순한 시스템 과부하로 판단하였다.
+                이후 공격자는 CPU 사용률을 낮게 유지하는 방식으로
+                추가 공격을 진행하였다.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="info">
+        <strong>접속키란?</strong><br>
+        시스템에 접근할 수 있는 중요한 인증 정보이다.
+        외부에 노출되지 않도록 별도로 안전하게 관리해야 한다.
+    </div>
+
+    <div class="success">
+        이번 사고는 하나의 보안 문제가 아니라
+        접속 정보 관리, 접근 권한 통제, 이상 징후 탐지 등
+        여러 단계에서 보안 조치가 충분하지 않았기 때문에
+        피해가 확대된 사례라고 볼 수 있다.
+    </div>
+</section>
+
+<!-- 04 -->
+<section class="section" id="damage">
+    <h2><span>04.</span> 피해 규모 및 영향</h2>
+
+    <p>
+        2026년 티빙 개인정보 유출 사고로
+        약 3,954만 개의 계정 정보와
+        개발 프로젝트 361건이 유출되었다.
+        유출된 계정에는 활성화 계정뿐만 아니라
+        휴면 및 탈퇴 계정도 포함되어 있으며,
+        실제 피해 인원과는 차이가 있다.
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+            <h4>개인정보 유출</h4>
+            <p>
+                이름, 생년월일, 휴대전화번호, 이메일 주소 등
+                총 20개 항목의 개인정보가 유출되었다.
+                일부 정보는 암호화되어 있었지만
+                암호화키도 함께 유출되어
+                복호화가 가능한 상태였다.
+            </p>
+        </div>
+
+        <div class="card">
+            <h4>기업 내부 자료 유출</h4>
+            <p>
+                소스코드와 이용자 인증체계,
+                결제 관리 등 서비스 운영에 관련된
+                개발 자료도 유출되었다.
+                이는 기업의 기술 정보가 외부에
+                노출되었다는 점에서 문제가 된다.
+            </p>
+        </div>
+
+        <div class="card">
+            <h4>2차 피해 가능성</h4>
+            <p>
+                유출된 개인정보는 스미싱이나 보이스피싱 등
+                2차 범죄에 악용될 가능성이 있다.
+                다만 조사 결과 발표 당시
+                실제 2차 피해는 확인되지 않았다.
+            </p>
+        </div>
+
+        <div class="card">
+            <h4>기업 신뢰도 하락</h4>
+            <p>
+                대규모 개인정보 유출은 이용자의 불안감을 높이고,
+                기업의 신뢰도 하락과
+                추가적인 보안 위협으로 이어질 수 있다.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="success">
+        이번 사고는 개인정보 유출뿐만 아니라
+        기업의 핵심 기술 자료까지 노출될 수 있다는 점에서
+        피해 범위가 큰 사건이라고 볼 수 있다.
+    </div>
+</section>
+
+<!-- 05 -->
+<section class="section" id="response">
+    <h2><span>05.</span> 사고 대응 과정</h2>
+
+    <p>
+        티빙은 개인정보 유출 사고를 발견한 이후
+        비정상적인 접근을 차단하고,
+        관계 기관에 신고하여 사고 원인과 피해 규모를 조사하였다.
+    </p>
+
+    <h3>5.1 초기 대응 및 접근 차단</h3>
+    <p>
+        2026년 5월 30일 데이터베이스 서버의 CPU 사용률이
+        급격히 증가하자 티빙은 해당 작업을 차단하였다.
+        그러나 당시에는 단순한 시스템 과부하로 판단하여
+        추가적인 공격을 막지 못하였다.
+    </p>
+
+    <h3>5.2 침해사고 신고 및 조사</h3>
+    <p>
+        티빙은 6월 1일 한국인터넷진흥원(KISA)에
+        침해사고를 신고하였다.
+        이후 과학기술정보통신부와 KISA가 현장 조사에 착수하였으며,
+        6월 3일 민관합동조사단이 구성되었다.
+    </p>
+
+    <h3>5.3 보안 강화 및 재발 방지 조치</h3>
+    <p>
+        조사 과정에서 접속키 관리와 접근 권한 통제 등의
+        문제점이 확인되었다.
+        이에 따라 접속키 관리 강화, 중요 정보 암호화,
+        접근 권한 최소화, 이상 징후 탐지 체계 개선 등의
+        재발 방지 대책이 제시되었다.
+    </p>
+
+    <div class="warning">
+        이번 사고는 초기 이상 징후를 발견했더라도
+        정확한 원인을 파악하고 신속하게 대응하지 못하면
+        피해가 확대될 수 있다는 점을 보여준다.
+    </div>
+</section>
+
+<!-- 06 -->
+<section class="section" id="problems">
+    <h2><span>06.</span> 보안상 미흡했던 부분</h2>
+
+    <p>
+        이번 티빙 개인정보 유출 사고에서는
+        접속 정보 관리뿐만 아니라
+        침해사고를 탐지하고 대응하는 과정에서도
+        여러 문제점이 드러났다.
+    </p>
+
+    <h3>6.1 중요 인증 정보 관리 부족</h3>
+    <p>
+        개발 프로젝트에 운영환경 접속키와
+        데이터베이스 접속 정보가 안전하게 보호되지 않은
+        상태로 저장되어 있었다.
+        이러한 정보는 별도로 관리하고 접근을 제한해야 하지만,
+        충분한 보호 조치가 이루어지지 않았다.
+    </p>
+
+    <h3>6.2 초기 침해사고 대응 미흡</h3>
+    <p>
+        5월 30일 서버에서 비정상적인 과부하가 발견되었지만
+        단순한 시스템 문제로 판단하였다.
+        이로 인해 추가적인 침입 가능성을 충분히 조사하지 못했고,
+        다음 날 발생한 대규모 정보 유출을 막지 못하였다.
+    </p>
+
+    <h3>6.3 비정상적인 활동 탐지 부족</h3>
+    <p>
+        공격자가 새로운 가상서버를 생성하고
+        대량의 데이터를 외부로 전송하는 과정에서
+        공격을 효과적으로 탐지하지 못하였다.
+        이는 서버 사용량뿐만 아니라 비정상적인 접근과
+        데이터 이동을 감시하는 체계가 부족했음을 보여준다.
+    </p>
+
+    <div class="success">
+        이번 사고는 보안 시스템을 갖추는 것뿐만 아니라
+        이상 징후를 정확하게 분석하고
+        신속하게 대응하는 과정도 중요하다는 점을 보여준다.
+    </div>
+</section>
+
+<!-- 07 -->
+<section class="section" id="improvement">
+    <h2><span>07.</span> 재발 방지를 위한 개선 방안</h2>
+
+    <p>
+        이번 티빙 개인정보 유출 사고와 같은 피해를 예방하기 위해서는
+        중요 정보 관리와 접근 통제를 강화하고,
+        이상 징후에 신속하게 대응할 수 있는 보안 체계가 필요하다.
+    </p>
+
+    <h3>7.1 접속키 및 인증 정보 관리 강화</h3>
+    <p>
+        접속키와 데이터베이스 비밀번호는
+        소스코드에 직접 저장하지 않고
+        별도의 보안 관리 시스템에 보관해야 한다.
+        또한 접속키를 주기적으로 변경하고,
+        외부에 노출된 경우 즉시 폐기하여 악용을 방지해야 한다.
+    </p>
+
+    <h3>7.2 접근 권한 최소화</h3>
+    <p>
+        개발환경과 운영환경의 접근 권한을 구분하고,
+        사용자에게 업무에 필요한 최소한의 권한만 부여해야 한다.
+        또한 중요 시스템에 접근할 때 다중 인증(MFA)을 적용하여
+        접속 정보가 유출되더라도 추가적인 침입을 어렵게 해야 한다.
+    </p>
+
+    <h3>7.3 이상 징후 탐지 및 대응 체계 개선</h3>
+    <p>
+        서버의 CPU 사용률뿐만 아니라
+        비정상적인 로그인, 새로운 서버 생성,
+        대량의 데이터 전송 등을 함께 감시해야 한다.
+        의심스러운 활동이 발견되면 신속하게 원인을 조사하고
+        접근을 차단할 수 있도록 대응 절차를 마련해야 한다.
+    </p>
+
+    <div class="success">
+        이러한 보안 대책을 적용하면 접속 정보가 유출되더라도
+        피해 확산을 줄이고,
+        비슷한 사고가 재발할 가능성을 낮출 수 있다.
+    </div>
+</section>
+
+<!-- 08 -->
+<section class="section" id="reflection">
+    <h2><span>08.</span> 새롭게 알게 된 점 및 느낀 점</h2>
+
+    <p>
+        티빙 개인정보 유출 사고가 있었다는 사실은 알고 있었다.
+        이번에 사고를 자세히 조사하면서
+        접속키 하나가 유출되는 것만으로도
+        대규모 개인정보 유출로 이어질 수 있다는 점을 알게 되었다.
+        특히 개발환경에서 발생한 보안 문제가
+        실제 서비스 운영환경까지 영향을 줄 수 있다는 사실이
+        기억에 남는다.
+    </p>
+
+    <p>
+        또한 보안 사고를 예방하는 것도 중요하지만
+        이상 징후를 발견했을 때 빠르고 정확하게
+        대응하는 과정도 중요하다는 것을 느꼈다.
+    </p>
+
+    <p>
+        처음에는 개인정보 유출 사고가 단순히
+        외부 공격자의 침입으로만 발생한다고 생각했다.
+        하지만 이번 사례를 통해 기업 내부의 보안 관리와
+        대응 체계도 사고의 발생과 피해 규모에
+        큰 영향을 준다는 점을 알게 되었다.
+    </p>
+
+    <p>
+        앞으로 접속키 관리와 접근 통제,
+        침해사고 탐지 기술에 대해서도
+        더 공부해 보고 싶다.
+    </p>
+</section>
+
+<!-- 09 -->
+<section class="section" id="references">
+    <h2><span>09.</span> 참고자료</h2>
+
+    <p>
+        사고 발생 과정과 침입 경로, 피해 규모 및 대응 방안 등을
+        정리하기 위해 다음 자료를 참고하였다.
+    </p>
+
+    <ol class="references">
+
+        <li>
+            <strong>과학기술정보통신부</strong>
+            <p>
+                「티빙 민관합동조사단 조사결과 주요내용」
+                (2026.09.04)
+            </p>
+
+            <p><strong>참고 부분</strong></p>
+            <ul>
+                <li>사고 발생 및 신고 과정</li>
+                <li>시스템 침입 경로</li>
+                <li>개발 프로젝트와 개인정보 유출 규모</li>
+                <li>사고 원인 및 조사 결과</li>
+            </ul>
+
+            <a href="https://m.korea.kr/briefing/policyBriefingView.do?newsId=156780195"
+               target="_blank" rel="noopener noreferrer">
+                https://m.korea.kr/briefing/policyBriefingView.do?newsId=156780195
+            </a>
+        </li>
+
+        <li>
+            <strong>연합뉴스</strong>
+            <p>
+                「티빙 보안관리 총체적 부실…
+                활성·휴면·탈퇴 계정 모두 유출」
+                (2026.09.03)
+            </p>
+
+            <p><strong>참고 부분</strong></p>
+            <ul>
+                <li>접속키 관리 부실</li>
+                <li>접근 권한 통제 부족</li>
+                <li>이상 징후 탐지 및 신고 지연</li>
+                <li>보안 취약점 미조치</li>
+                <li>재발 방지 권고사항</li>
+            </ul>
+
+            <a href="https://www.yna.co.kr/amp/view/AKR20260903132000017"
+               target="_blank" rel="noopener noreferrer">
+                https://www.yna.co.kr/amp/view/AKR20260903132000017
+            </a>
+        </li>
+
+    </ol>
+</section>
+
+<footer class="footer">
+    DFIR & Cyber Security Archive · Security Incident Analysis
+</footer>
+
+</div>
+</body>
+</html>
