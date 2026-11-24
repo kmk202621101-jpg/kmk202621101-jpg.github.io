@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>보안 입문자로서의 회고</title>
+
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-card: #161b22;
+            --border-color: #30363d;
+            --accent-blue: #58a6ff;
+            --accent-purple: #a78bfa;
+            --accent-green: #3fb950;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: Arial, "맑은 고딕", sans-serif;
+            line-height: 1.9;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 40px 25px 70px;
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .back {
+            display: inline-block;
+            padding: 9px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .back:hover {
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+            background: #1c2635;
+        }
+
+        .archive {
+            color: var(--text-secondary);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .header {
+            background: linear-gradient(
+                135deg,
+                #161b22,
+                #101c30
+            );
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 30px;
+        }
+
+        .header-label {
+            color: var(--accent-blue);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            color: var(--accent-blue);
+            font-size: 32px;
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin: 10px 0 20px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: #1c2b40;
+            color: #93c5fd;
+            border: 1px solid #304766;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 22px 28px;
+            margin-bottom: 35px;
+        }
+
+        .toc h3 {
+            color: var(--accent-blue);
+            margin: 0 0 12px;
+        }
+
+        .toc a {
+            display: block;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 5px 0;
+        }
+
+        .toc a:hover {
+            color: var(--accent-blue);
+        }
+
+        .section {
+            margin-top: 40px;
+            scroll-margin-top: 25px;
+        }
+
+        .section h2 {
+            font-size: 23px;
+            color: var(--accent-blue);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 22px;
+        }
+
+        .section-number {
+            color: var(--accent-blue);
+            font-family: monospace;
+            font-size: 16px;
+            margin-right: 8px;
+        }
+
+        .content-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px 28px;
+            margin-bottom: 18px;
+        }
+
+        .content-card p {
+            margin: 0;
+            font-size: 15px;
+            line-height: 2;
+        }
+
+        .content-card p + p {
+            margin-top: 16px;
+        }
+
+        .detail-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin-bottom: 18px;
+        }
+
+        .detail-card h3 {
+            color: var(--accent-purple);
+            font-size: 18px;
+            margin: 0 0 15px;
+        }
+
+        .detail-card p {
+            font-size: 15px;
+            margin: 0;
+            line-height: 2;
+        }
+
+        .plan-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-green);
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin-bottom: 18px;
+        }
+
+        .plan-card h3 {
+            color: var(--accent-green);
+            font-size: 18px;
+            margin: 0 0 15px;
+        }
+
+        .plan-card p {
+            font-size: 15px;
+            line-height: 2;
+            margin: 0;
+        }
+
+        strong {
+            color: #93c5fd;
+        }
+
+        .conclusion {
+            background: linear-gradient(
+                135deg,
+                #161b22,
+                #101c30
+            );
+            border: 1px solid #304766;
+            border-radius: 12px;
+            padding: 28px;
+        }
+
+        .conclusion p {
+            font-size: 15px;
+            line-height: 2;
+            margin: 0 0 18px;
+        }
+
+        .conclusion p:last-child {
+            margin-bottom: 0;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        .top-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .top-button:hover {
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px 15px 50px;
+            }
+
+            .header {
+                padding: 23px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .section h2 {
+                font-size: 20px;
+            }
+
+            .content-card,
+            .detail-card,
+            .plan-card,
+            .conclusion {
+                padding: 20px;
+            }
+
+            .archive {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body id="top">
+
+<div class="container">
+
+    <!-- ==================== 상단 메뉴 ==================== -->
+
+    <div class="top-nav">
+
+        <a class="back" href="/#doc">
+            ← 이전 페이지로 돌아가기
+        </a>
+
+        <span class="archive">
+            DFIR / CYBER SECURITY ARCHIVE
+        </span>
+
+    </div>
+
+
+    <!-- ==================== 게시글 제목 ==================== -->
+
+    <header class="header">
+
+        <div class="header-label">
+            REFLECTION & SECURITY JOURNEY
+        </div>
+
+        <h1>📝 보안 입문자로서의 회고</h1>
+
+        <p class="subtitle">
+            보안의 첫 시작과 내가 마주한 한계,
+            그리고 앞으로의 성장 방향에 대한 기록
+        </p>
+
+        <div class="tags">
+            <span class="tag">Reflection</span>
+            <span class="tag">Security Journey</span>
+            <span class="tag">Knights Frontier</span>
+            <span class="tag">DFIR</span>
+        </div>
+
+    </header>
+
+
+    <!-- ==================== 목차 ==================== -->
+
+    <nav class="toc">
+
+        <h3>📑 목차</h3>
+
+        <a href="#section1">
+            01. 보안의 첫 시작 이후
+        </a>
+
+        <a href="#section2">
+            02. 내가 마주한 한계와 부족한 점
+        </a>
+
+        <a href="#section3">
+            03. 부족한 점을 채워나갈 앞으로의 계획
+        </a>
+
+        <a href="#section4">
+            04. 마치며
+        </a>
+
+    </nav>
+
+
+    <!-- ==================== 1. 보안의 첫 시작 이후 ==================== -->
+
+    <section class="section" id="section1">
+
+        <h2>
+            <span class="section-number">01.</span>
+            보안의 첫 시작 이후
+        </h2>
+
+        <div class="content-card">
+
+            <p>
+                정보보안공학과 1학년으로 대학 생활을 딱 시작했을 때,
+                나에게 보안이라는 분야는 정말 거대하고 멋있었지만
+                솔직히 한편으로는 어떻게 접근해야 하고 어떻게
+                시작해야 하는지 막막했다.
+                그리고 영화나 드라마에서 보던 해커나 포렌식 수사를
+                하는 모습만 떠올리며 호기심도 있었지만 두려움도 있었다.
+            </p>
+
+            <p>
+                보안을 시작하고 몇 개월 동안 학부 수업을 들으며
+                C언어, 파이썬, 자바 같은 기초 프로그래밍 언어를
+                체계적으로 익히고, 동아리 활동을 통해 다양한 보안
+                개념들과 기초적인 문제들을 접해 볼 수 있었다.
+            </p>
+
+            <p>
+                비록 이제 막 입문해서 기초 체력을 다지고 있는
+                1학년이지만, 학부 수업과 동아리에서 배운 코딩과
+                이론들이 실제 시스템 취약점이나 공격 분석,
+                그리고 포렌식 추적과 어떻게 연결되는지 조금씩
+                알게 되었다.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== 2. 한계와 부족한 점 ==================== -->
+
+    <section class="section" id="section2">
+
+        <h2>
+            <span class="section-number">02.</span>
+            내가 마주한 한계와 부족한 점
+        </h2>
+
+        <div class="content-card">
+
+            <p>
+                동아리의 심화 과제나 보안 4대 탑 컨퍼런스 논문을
+                리뷰하고 분석하면서 진짜 아는 것이 하나도 없구나
+                하는 것을 느꼈다.
+                그 과정에서 나의 한계와 부족함을 명확하게 느꼈다.
+                1학년으로서 마주한 부족한 점이 정말 많지만,
+                그중 대표적인 세 가지는 다음과 같다.
+            </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+            <h3>
+                01. 프로그래밍 언어와 보안 개념 간의 연결 부족
+            </h3>
+
+            <p>
+                학교에서 배운 C언어나 파이썬, 자바 코딩과
+                보안 이론을 각각 별개의 과목으로만 공부하다 보니
+                둘을 하나로 연결하는 응용 능력이 많이 부족하다고
+                느꼈다.
+                예를 들어 C언어로 작성한 코드에서 메모리 구조상
+                버퍼 오버플로우 같은 취약점이 정확히 어떤 원리로
+                발생하는지, 혹은 파이썬 파싱 라이브러리가 실제
+                악성 파일 탐지 도구나 포렌식 분석기에 어떻게
+                적용되어 작동하는지 실전 코드로 직접 연결하려고
+                했을 때 어떻게 해야 하는지 모르겠다고 생각한
+                적이 많았다.
+            </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+            <h3>
+                02. 실전 데이터 분석 경험 및 역추적 역량 부족
+            </h3>
+
+            <p>
+                이제 막 1학년 과정을 지나고 있다 보니 이론이나
+                단순한 기초 예제 코딩은 접해 보았지만,
+                실제 악성 문서 파일을 구조적으로 파헤치거나
+                디지털 포렌식 관점에서 데이터의 흐름과 시스템에
+                남은 흔적을 세밀하게 역추적해 보는 실전 경험이
+                턱없이 부족했다.
+                논문을 읽으면서도 이 복잡한 구조를 내가 직접
+                포렌식 도구로 분석할 수 있을까?라는 생각이 들었다.
+            </p>
+
+        </div>
+
+
+        <div class="detail-card">
+
+            <h3>
+                03. 수동적인 문제 해결 습관과 주체적 탐구심 부족
+            </h3>
+
+            <p>
+                과제나 문제를 풀 때 오류가 발생하거나 실패했을 때,
+                왜 이 오류가 발생했는지를 깊이 파고들기보다는
+                당장 답을 내고 싶거나 과제를 빠르게 끝내고 싶어서
+                선배분들께 물어보거나 AI에 곧바로 의존해 버리는
+                수동적인 태도가 있었다.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== 3. 앞으로의 계획 ==================== -->
+
+    <section class="section" id="section3">
+
+        <h2>
+            <span class="section-number">03.</span>
+            부족한 점을 채워나갈 앞으로의 계획
+        </h2>
+
+
+        <div class="plan-card">
+
+            <h3>
+                01. 전공 코딩과 보안 이론을 잇는 미니 프로젝트
+            </h3>
+
+            <p>
+                학교에서 배우는 C언어, 파이썬, 자바 전공 지식과
+                보안 이론이 따로 공부되는 것을 막기 위해
+                직접 코드로 구현해 보는 미니 프로젝트에
+                도전할 것이다.
+                최근 리뷰했던 USENIX Security의 VAPD 논문에서
+                얻은 아이디어를 바탕으로, Python 파싱 라이브러리와
+                간이 오토인코더 구조를 활용해 미니 PDF 악성 구조
+                탐지 및 복원 오차 측정 도구를 내 손으로 직접
+                코딩해 보며 프로그래밍 언어가 보안 분석에
+                적용되는 과정을 경험해 볼 것이다.
+            </p>
+
+        </div>
+
+
+        <div class="plan-card">
+
+            <h3>
+                02. 수동적인 의존을 줄이고 역추적 디버깅 경험 늘리기
+            </h3>
+
+            <p>
+                그동안 과제나 문제를 풀 때 오류가 발생하거나
+                실패한 경험이 많았다.
+                그때마다 답을 빨리 내고 싶어서 선배님들께
+                물어보거나 AI에 곧바로 의존하던 수동적인
+                태도보다는 시스템 로그와 메모리 상태,
+                코드의 실행 흐름을 세밀하게 역추적하는
+                디버깅 습관을 들이고 싶다.
+                왜 이 오류가 발생했을까를 내 힘으로 끝까지
+                파헤치는 주체적인 탐구 능력을 기를 것이다.
+            </p>
+
+        </div>
+
+
+        <div class="plan-card">
+
+            <h3>
+                03. 나이츠 프론티어와 동아리 스터디를 통한
+                실전 데이터 분석 경험 쌓기
+            </h3>
+
+            <p>
+                이론과 기초 코딩에만 머물지 않고 실제 악성 문서
+                파일 구조나 디지털 포렌식 관점의 데이터 흐름을
+                분석하는 실전 경험을 넓힐 것이다.
+                혼자서 해결하기 어려운 내용들은 동아리 동료들과
+                함께 스터디를 만들어 서로 토론하고,
+                나이츠 프론티어에서 주어지는 과제들을
+                포기하지 않고 끝까지 완수해 내며 실전 감각과
+                분석 역량을 기를 것이다.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== 4. 마치며 ==================== -->
+
+    <section class="section" id="section4">
+
+        <h2>
+            <span class="section-number">04.</span>
+            마치며
+        </h2>
+
+        <div class="conclusion">
+
+            <p>
+                이번 회고를 작성하면서 보안 입문자로서 현재
+                내가 서 있는 출발점과 앞으로 채워나가야 할 점이
+                무엇인지 명확하게 알 수 있었다.
+                정보보안이라는 거대하고 깊이 있는 학문 앞에서
+                막막함과 한계에 부딪히기도 했지만,
+                내 부족함을 솔직하게 인정하고 나아갈 방향을
+                다잡는 소중한 계기가 되었다.
+            </p>
+
+            <p>
+                <strong>
+                    시작부터 완벽한 사람은 없다고 생각한다.
+                </strong>
+                그렇기에 앞으로 나이츠 프론티어 과제와 동아리
+                스터디를 진행하며 마주할 수많은 실패와
+                디버깅 오류 역시 나를 한층 더 단단하게 만들어 줄
+                경험이라고 믿는다.
+            </p>
+
+            <p>
+                매일 배운 지식과 문제를 해결해 나가는 과정을
+                깃허브 블로그에 꾸준히 기록하며 지식의 깊이를
+                다지고, 스스로 질문하며 끝까지 파고드는
+                주체적인 학습 루틴을 꼭 완성할 것이다.
+            </p>
+
+            <p>
+                훗날 디지털 포렌식 및 침해사고 대응 분야에서
+                복잡한 원인을 정확히 규명하고 사회에 기여할 수
+                있는 전문성과 책임감을 갖춘
+                <strong>보안 전문가</strong>로 성장하기 위해
+                멈추지 않고 꾸준히 나아갈 것이다.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== 하단 ==================== -->
+
+    <footer class="footer">
+
+        <div>
+            DFIR & Cyber Security Archive
+        </div>
+
+        <div>
+            Reflection · Learning · Growth
+        </div>
+
+        <a class="top-button" href="#top">
+            ↑ 맨 위로 이동
+        </a>
+
+    </footer>
+
+</div>
+
+</body>
+</html>
